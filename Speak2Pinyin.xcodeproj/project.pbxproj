@@ -11,7 +11,7 @@
 		50EFB9F3286A0EFE006E3E06 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EFB9F2286A0EFE006E3E06 /* ContentView.swift */; };
 		50EFB9F5286A0EFF006E3E06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50EFB9F4286A0EFF006E3E06 /* Assets.xcassets */; };
 		50EFB9F8286A0EFF006E3E06 /* Preview.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50EFB9F7286A0EFF006E3E06 /* Preview.xcassets */; };
-		50EFBA05286A1E90006E3E06 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 50EFBA04286A1E90006E3E06 /* Core */; };
+		50EFBA07286A2AF7006E3E06 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 50EFBA06286A2AF7006E3E06 /* Core */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,7 +28,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				50EFBA05286A1E90006E3E06 /* Core in Frameworks */,
+				50EFBA07286A2AF7006E3E06 /* Core in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,7 +128,7 @@
 			);
 			name = Speak2Pinyin;
 			packageProductDependencies = (
-				50EFBA04286A1E90006E3E06 /* Core */,
+				50EFBA06286A2AF7006E3E06 /* Core */,
 			);
 			productName = Speak2Pinyin;
 			productReference = 50EFB9ED286A0EFE006E3E06 /* Speak2Pinyin.app */;
@@ -392,7 +392,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		50EFBA04286A1E90006E3E06 /* Core */ = {
+		50EFBA06286A2AF7006E3E06 /* Core */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Core;
 		};
