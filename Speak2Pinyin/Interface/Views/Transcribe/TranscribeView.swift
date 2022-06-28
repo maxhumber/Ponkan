@@ -1,5 +1,5 @@
 import SwiftUI
-import SwiftUIFlow
+import Sugar
 
 struct TranscriptedUnit: Identifiable, Equatable {
     var id = UUID()
@@ -17,6 +17,14 @@ struct TranscriptedUnit: Identifiable, Equatable {
 //    }
 }
 
+extension Text {
+    init(_ string: String, configure: ((inout AttributedString) -> Void)) {
+        var attributedString = AttributedString(string) /// create an `AttributedString`
+        configure(&attributedString) /// configure using the closure
+        self.init(attributedString) /// initialize a `Text`
+    }
+}
+
 struct TranscribeView: View {
     @StateObject var viewModel: TranscribeViewModel
     
@@ -28,7 +36,7 @@ struct TranscribeView: View {
         VStack(spacing: 10) {
             Image(systemName: "circle")
                 .opacity(0)
-            ScrollView {
+            ScrollView(showsIndicators: false) {
                 FlowStack {
                     ForEach(viewModel.units) { unit in
                         VStack {
@@ -40,12 +48,14 @@ struct TranscribeView: View {
                                     Text("~\(unit.corrected.pinyin())~")
                                         .foregroundColor(.red)
                                 } else {
-                                    Text(unit.corrected.pinyin())
+                                    Text(unit.corrected.pinyin()) {
+                                        $0.strikethroughStyle = Text.LineStyle(pattern: .solid, color: .red)
+                                    }
                                 }
                             }
                             .font(.title)
                         }
-                        .padding()
+                        .padding(10)
                     }
                 }
                 .padding(.horizontal)
