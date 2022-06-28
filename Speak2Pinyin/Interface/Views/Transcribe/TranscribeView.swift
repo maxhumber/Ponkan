@@ -1,30 +1,6 @@
 import SwiftUI
 import Sugar
 
-struct TranscriptedUnit: Identifiable, Equatable {
-    var id = UUID()
-    var original: String
-    var corrected: String
-    var flag: Bool = false
-    
-    init(_ character: Character) {
-        self.original = String(character)
-        self.corrected = String(character)
-    }
-    
-//    var flag: Bool {
-//        original != corrected
-//    }
-}
-
-extension Text {
-    init(_ string: String, configure: ((inout AttributedString) -> Void)) {
-        var attributedString = AttributedString(string) /// create an `AttributedString`
-        configure(&attributedString) /// configure using the closure
-        self.init(attributedString) /// initialize a `Text`
-    }
-}
-
 struct TranscribeView: View {
     @StateObject var viewModel: TranscribeViewModel
     
@@ -34,34 +10,57 @@ struct TranscribeView: View {
     
     var body: some View {
         VStack(spacing: 10) {
-            Image(systemName: "circle")
-                .opacity(0)
-            ScrollView(showsIndicators: false) {
-                FlowStack {
-                    ForEach(viewModel.units) { unit in
-                        VStack {
-                            Text(unit.corrected.pinyin())
-                                .font(.caption)
-                                .opacity(0)
-                            Group {
-                                if unit.flag {
-                                    Text("~\(unit.corrected.pinyin())~")
-                                        .foregroundColor(.red)
-                                } else {
-                                    Text(unit.corrected.pinyin()) {
-                                        $0.strikethroughStyle = Text.LineStyle(pattern: .solid, color: .red)
-                                    }
-                                }
-                            }
-                            .font(.title)
-                        }
-                        .padding(10)
-                    }
-                }
-                .padding(.horizontal)
-            }
+            header
+            content
             micButton
         }
+    }
+    
+    private var header: some View {
+        HStack {
+            Image(systemName: "line.3.horizontal")
+                .opacity(0)
+            Spacer()
+            ZStack {
+                Text("100%").opacity(0)
+                if let score = viewModel.score {
+                    Text(score)
+                        .foregroundColor(.secondary)
+                }
+            }
+        }
+        .padding()
+    }
+    
+    private var content: some View {
+        ScrollView(showsIndicators: false) {
+            FlowStack {
+                ForEach($viewModel.blocks) { $block in
+                    Button {
+                        block.flagged.toggle()
+                    } label: {
+                        makeLabel(block)
+                    }
+                    .disabled(viewModel.active)
+                }
+            }
+            .padding(.horizontal)
+        }
+    }
+    
+    private func makeLabel(_ block: TranscriptedBlock) -> some View {
+        VStack {
+            Text(block.pinyin)
+                .font(.caption)
+                .opacity(0)
+            Text(block.pinyin) {
+                $0.strikethroughStyle = Text.LineStyle(pattern: .solid, color: block.flagged ? .red : .clear)
+            }
+            .font(.title)
+        }
+        .padding(block.kind == .punctuation ? 0 : 10)
+        .foregroundColor(block.kind == .punctuation ? .secondary : .primary)
+        .foregroundColor(.primary)
     }
     
     private var micButton: some View {

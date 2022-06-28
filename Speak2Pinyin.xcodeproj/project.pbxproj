@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		501A074E286B5C8C00733BED /* TranscribeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501A074D286B5C8C00733BED /* TranscribeViewModel.swift */; };
 		501A0756286B746700733BED /* Sugar in Frameworks */ = {isa = PBXBuildFile; productRef = 501A0755286B746700733BED /* Sugar */; };
+		501A0759286B9AAE00733BED /* TranscriptedBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501A0758286B9AAE00733BED /* TranscriptedBlock.swift */; };
 		50EFB9F1286A0EFE006E3E06 /* Speak2PinyinApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EFB9F0286A0EFE006E3E06 /* Speak2PinyinApp.swift */; };
 		50EFB9F3286A0EFE006E3E06 /* TranscribeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EFB9F2286A0EFE006E3E06 /* TranscribeView.swift */; };
 		50EFB9F5286A0EFF006E3E06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50EFB9F4286A0EFF006E3E06 /* Assets.xcassets */; };
@@ -19,6 +20,7 @@
 /* Begin PBXFileReference section */
 		501A074D286B5C8C00733BED /* TranscribeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscribeViewModel.swift; sourceTree = "<group>"; };
 		501A0753286B740100733BED /* Sugar */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Sugar; sourceTree = "<group>"; };
+		501A0758286B9AAE00733BED /* TranscriptedBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptedBlock.swift; sourceTree = "<group>"; };
 		50EFB9ED286A0EFE006E3E06 /* Speak2Pinyin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Speak2Pinyin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50EFB9F0286A0EFE006E3E06 /* Speak2PinyinApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speak2PinyinApp.swift; sourceTree = "<group>"; };
 		50EFB9F2286A0EFE006E3E06 /* TranscribeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscribeView.swift; sourceTree = "<group>"; };
@@ -43,6 +45,7 @@
 		501A074C286B524A00733BED /* Transcribe */ = {
 			isa = PBXGroup;
 			children = (
+				501A0758286B9AAE00733BED /* TranscriptedBlock.swift */,
 				50EFB9F2286A0EFE006E3E06 /* TranscribeView.swift */,
 				501A074D286B5C8C00733BED /* TranscribeViewModel.swift */,
 			);
@@ -202,6 +205,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				501A0759286B9AAE00733BED /* TranscriptedBlock.swift in Sources */,
 				50EFB9F3286A0EFE006E3E06 /* TranscribeView.swift in Sources */,
 				501A074E286B5C8C00733BED /* TranscribeViewModel.swift in Sources */,
 				50EFB9F1286A0EFE006E3E06 /* Speak2PinyinApp.swift in Sources */,

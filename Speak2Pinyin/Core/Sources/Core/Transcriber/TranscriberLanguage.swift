@@ -9,6 +9,10 @@ public enum TranscriberLanguage {
     case turkish
     case chinese(_ flavor: Chinese = .mandarin)
     
+    public static let english = Self.english(.unitedStates)
+    public static let mandarin = Self.chinese(.mandarin)
+    public static let cantonese = Self.chinese(.cantonese)
+    
     public enum English: String {
         case unitedStates = "en-US"
         case canada = "en-CA"
