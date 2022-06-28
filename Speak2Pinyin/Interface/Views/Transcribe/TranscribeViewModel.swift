@@ -14,6 +14,19 @@ import Core
         self.active = active
     }
     
+    private func blockify(_ text: String) -> [TranscriptedBlock] {
+        text.explode().filter { !$0.isWhitespace }.map { TranscriptedBlock($0) }
+    }
+    
+    var score: String? {
+        let validBlocks = blocks.filter { $0.kind == .chinese }
+        if validBlocks.isEmpty || active { return nil }
+        let wrong = validBlocks.filter { $0.flagged }.count
+        let total = validBlocks.count
+        let correct = 1 - (Double(wrong) / Double(total))
+        return formatter.string(from: NSNumber(value: correct))
+    }
+    
     func toggle() {
         active ? stop() : start()
     }
@@ -34,33 +47,19 @@ import Core
         }
     }
     
-    var score: String? {
-        let validBlocks = blocks.filter { $0.kind == .chinese }
-        if validBlocks.isEmpty || active { return nil }
-        let wrong = validBlocks.filter { $0.flagged }.count
-        let total = validBlocks.count
-        let correct = 1 - (Double(wrong) / Double(total))
-        return formatter.string(from: NSNumber(value: correct))
-    }
-    
-    private var formatter: NumberFormatter {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .percent
-        formatter.minimumIntegerDigits = 1
-        formatter.maximumIntegerDigits = 3
-        formatter.maximumFractionDigits = 1
-        return formatter
-
-    }
-
-    func blockify(_ text: String) -> [TranscriptedBlock] {
-        text.explode().filter { !$0.isWhitespace }.map { TranscriptedBlock($0) }
-    }
-    
     private func stop() {
         transcriber.stop()
         task?.cancel()
         task = nil
         active = false
     }
+    
+    private let formatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .percent
+        formatter.minimumIntegerDigits = 1
+        formatter.maximumIntegerDigits = 3
+        formatter.maximumFractionDigits = 1
+        return formatter
+    }()
 }
