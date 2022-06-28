@@ -7,17 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		501A0748286B44C500733BED /* FlowTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501A0747286B44C500733BED /* FlowTestView.swift */; };
+		501A074B286B4E5900733BED /* SwiftUIFlow in Frameworks */ = {isa = PBXBuildFile; productRef = 501A074A286B4E5900733BED /* SwiftUIFlow */; };
+		501A074E286B5C8C00733BED /* TranscribeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501A074D286B5C8C00733BED /* TranscribeViewModel.swift */; };
+		501A0750286B689700733BED /* Flow2TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501A074F286B689700733BED /* Flow2TestView.swift */; };
+		501A0752286B6C8000733BED /* Flow3Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501A0751286B6C8000733BED /* Flow3Test.swift */; };
 		50EFB9F1286A0EFE006E3E06 /* Speak2PinyinApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EFB9F0286A0EFE006E3E06 /* Speak2PinyinApp.swift */; };
-		50EFB9F3286A0EFE006E3E06 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EFB9F2286A0EFE006E3E06 /* ContentView.swift */; };
+		50EFB9F3286A0EFE006E3E06 /* TranscribeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EFB9F2286A0EFE006E3E06 /* TranscribeView.swift */; };
 		50EFB9F5286A0EFF006E3E06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50EFB9F4286A0EFF006E3E06 /* Assets.xcassets */; };
 		50EFB9F8286A0EFF006E3E06 /* Preview.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50EFB9F7286A0EFF006E3E06 /* Preview.xcassets */; };
 		50EFBA07286A2AF7006E3E06 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 50EFBA06286A2AF7006E3E06 /* Core */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		501A0747286B44C500733BED /* FlowTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowTestView.swift; sourceTree = "<group>"; };
+		501A074D286B5C8C00733BED /* TranscribeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscribeViewModel.swift; sourceTree = "<group>"; };
+		501A074F286B689700733BED /* Flow2TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flow2TestView.swift; sourceTree = "<group>"; };
+		501A0751286B6C8000733BED /* Flow3Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flow3Test.swift; sourceTree = "<group>"; };
 		50EFB9ED286A0EFE006E3E06 /* Speak2Pinyin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Speak2Pinyin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50EFB9F0286A0EFE006E3E06 /* Speak2PinyinApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speak2PinyinApp.swift; sourceTree = "<group>"; };
-		50EFB9F2286A0EFE006E3E06 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		50EFB9F2286A0EFE006E3E06 /* TranscribeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscribeView.swift; sourceTree = "<group>"; };
 		50EFB9F4286A0EFF006E3E06 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		50EFB9F7286A0EFF006E3E06 /* Preview.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Preview.xcassets; sourceTree = "<group>"; };
 		50EFB9FE286A0F56006E3E06 /* Core */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Core; sourceTree = "<group>"; };
@@ -28,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				501A074B286B4E5900733BED /* SwiftUIFlow in Frameworks */,
 				50EFBA07286A2AF7006E3E06 /* Core in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -35,6 +45,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		501A074C286B524A00733BED /* Transcribe */ = {
+			isa = PBXGroup;
+			children = (
+				50EFB9F2286A0EFE006E3E06 /* TranscribeView.swift */,
+				501A074F286B689700733BED /* Flow2TestView.swift */,
+				501A0751286B6C8000733BED /* Flow3Test.swift */,
+				501A074D286B5C8C00733BED /* TranscribeViewModel.swift */,
+			);
+			path = Transcribe;
+			sourceTree = "<group>";
+		};
 		50EFB9E4286A0EFE006E3E06 = {
 			isa = PBXGroup;
 			children = (
@@ -99,7 +120,8 @@
 		50EFBA02286A0F83006E3E06 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				50EFB9F2286A0EFE006E3E06 /* ContentView.swift */,
+				501A074C286B524A00733BED /* Transcribe */,
+				501A0747286B44C500733BED /* FlowTestView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -129,6 +151,7 @@
 			name = Speak2Pinyin;
 			packageProductDependencies = (
 				50EFBA06286A2AF7006E3E06 /* Core */,
+				501A074A286B4E5900733BED /* SwiftUIFlow */,
 			);
 			productName = Speak2Pinyin;
 			productReference = 50EFB9ED286A0EFE006E3E06 /* Speak2Pinyin.app */;
@@ -158,6 +181,9 @@
 				Base,
 			);
 			mainGroup = 50EFB9E4286A0EFE006E3E06;
+			packageReferences = (
+				501A0749286B4E5900733BED /* XCRemoteSwiftPackageReference "SwiftUIFlow" */,
+			);
 			productRefGroup = 50EFB9EE286A0EFE006E3E06 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -184,8 +210,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				50EFB9F3286A0EFE006E3E06 /* ContentView.swift in Sources */,
+				50EFB9F3286A0EFE006E3E06 /* TranscribeView.swift in Sources */,
+				501A0750286B689700733BED /* Flow2TestView.swift in Sources */,
+				501A074E286B5C8C00733BED /* TranscribeViewModel.swift in Sources */,
+				501A0748286B44C500733BED /* FlowTestView.swift in Sources */,
 				50EFB9F1286A0EFE006E3E06 /* Speak2PinyinApp.swift in Sources */,
+				501A0752286B6C8000733BED /* Flow3Test.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,7 +421,23 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		501A0749286B4E5900733BED /* XCRemoteSwiftPackageReference "SwiftUIFlow" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/maxhumber/SwiftUIFlow.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
+		501A074A286B4E5900733BED /* SwiftUIFlow */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 501A0749286B4E5900733BED /* XCRemoteSwiftPackageReference "SwiftUIFlow" */;
+			productName = SwiftUIFlow;
+		};
 		50EFBA06286A2AF7006E3E06 /* Core */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Core;
