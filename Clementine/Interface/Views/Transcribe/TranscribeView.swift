@@ -106,23 +106,33 @@ struct TranscribeView: View {
     }
     
     private var content: some View {
-        ScrollView(showsIndicators: false) {
-            FlowGrid {
-                ForEach($viewModel.fragments) { $fragment in
-                    Button {
-                        if viewModel.correcting {
-                            viewModel.selectedFragment = fragment
-                        } else {
-                            fragment.flagged.toggle()
-                        }
-                    } label: {
-                        makeLabel(fragment)
-                    }
-                    .disabled(viewModel.active)
-                }
+        ScrollViewReader { reader in
+            ScrollView(showsIndicators: false) {
+                flowGrid
             }
-            .padding(.horizontal)
+            .onChange(of: viewModel.fragments) { _ in
+                reader.scrollTo(viewModel.fragments.last?.id)
+            }
         }
+    }
+    
+    @ViewBuilder var flowGrid: some View {
+        FlowGrid {
+            ForEach($viewModel.fragments) { $fragment in
+                Button {
+                    if viewModel.correcting {
+                        viewModel.selectedFragment = fragment
+                    } else {
+                        fragment.flagged.toggle()
+                    }
+                } label: {
+                    makeLabel(fragment)
+                }
+                .disabled(viewModel.active)
+                .id(fragment.id)
+            }
+        }
+        .padding(.horizontal)
     }
     
     private func makeLabel(_ fragment: Fragment) -> some View {
@@ -144,12 +154,11 @@ struct TranscribeView: View {
         }
         // FIX PADDING FOR THINGS THAT LEAD PUNCTUATION...
         .padding(EdgeInsets(top: 10, leading: fragment.isPunctuation ? 0 : 0, bottom: 10, trailing: 5))
-        .foregroundColor(fragment.isPunctuation ? .secondary.opacity(0.45) : .primary)
-        .foregroundColor(.primary)
+        .foregroundColor(fragment.isPunctuation ? .secondary.opacity(0.60) : .primary)
     }
     
     private var pinkishColor: Color {
-        colorScheme.isDark ? .red.opacity(0.55) : .red.opacity(0.15)
+        colorScheme.isDark ? .pink.opacity(0.40) : .red.opacity(0.15)
     }
     
     private var footer: some View {

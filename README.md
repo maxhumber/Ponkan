@@ -1,14 +1,8 @@
 ### Todo v1
 
-- ScrollView Reader? (Scroll while speaking)
-
 - Trailing punctuation problem...
 
   - Not editable...
-
-- Pink RoundedRectangles around error fragments
-
-  - Dark mode pinks
 
 - Clementine logo (+ mic button)
 

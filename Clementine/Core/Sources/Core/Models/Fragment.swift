@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Fragment: Identifiable, Codable {
+public struct Fragment: Identifiable, Codable, Equatable {
     public var id: UUID = .init()
     public var date: Date = .now
     public var heard: String
