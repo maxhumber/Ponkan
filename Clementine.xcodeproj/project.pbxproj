@@ -124,8 +124,8 @@
 		50EFBA02286A0F83006E3E06 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				501A2025286C9DF500EE1182 /* Correction */,
 				501A074C286B524A00733BED /* Transcribe */,
+				501A2025286C9DF500EE1182 /* Correction */,
 			);
 			path = Views;
 			sourceTree = "<group>";

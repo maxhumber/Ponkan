@@ -28,40 +28,46 @@ import Core
         fragments.filter { $0.isChinese }
     }
     
-    private var noValidFragments: Bool {
-        validFragments.isEmpty
+    private var totalFragments: Int {
+        validFragments.count
     }
     
-    var total: (value: Int?, string: String?) {
-        if noValidFragments { return (nil, nil) }
-        let value = validFragments.count
-        return (value, "\(value)")
+    private var correctFragments: Int {
+        validFragments.filter { !$0.flagged }.count
     }
     
-    private var correct: (value: Int?, string: String?) {
-        if noValidFragments { return (nil, nil) }
-        let value = validFragments.filter { !$0.flagged }.count
-        return (value, "\(value)")
+    private var score: Double? {
+        if validFragments.isEmpty || totalFragments <= 0 { return nil }
+        return Double(correctFragments) / Double(totalFragments)
     }
-//
-//    private var accuracy: Double? {
-//        if validFragments.isEmpty || active { return nil }
-//        return Double(correct) / Double(total)
-//    }
-//
-//    var score: String? {
-//        if validBlocks.isEmpty || active { return nil }
-//        let wrong = validBlocks.filter { $0.flagged }.count
-//        let total = validBlocks.count
-//
-//        return formatter.string(from: NSNumber(value: correct))
-//    }
+    
+    var stringWords: String {
+        guard totalFragments > 0 else { return "?" }
+        return "\(totalFragments)"
+    }
+    
+    var stringSeconds: String {
+        guard let seconds = stopwatch.seconds else { return "?" }
+        return "\(String(format: "%0.f", seconds))s"
+    }
+    
+    var stringWordsPerMinute: String {
+        guard let seconds = stopwatch.seconds else { return "?" }
+        let value = Double(totalFragments) / seconds * 60
+        return String(format: "%0.f", value)
+    }
+    
+    var stringScore: String {
+        guard let score else { return "?" }
+        return formatter.string(from: NSNumber(value: score)) ?? "?"
+    }
     
     func toggle() {
         active ? stop() : start()
     }
     
     private func start() {
+        fragments = []
         stopwatch.start()
         active = true
         task = Task(priority: .userInitiated) {

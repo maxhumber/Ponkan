@@ -5,7 +5,8 @@ extension String {
         if isEmpty { return "" }
         let cfString = CFStringCreateMutableCopy(nil, 0, self as CFString)
         CFStringTransform(cfString, nil, kCFStringTransformToLatin, false)
-        return cfString! as String
+        let string = cfString! as String
+        return string.filter { !$0.isWhitespace }
     }
     
     public func atomize() -> [String] {
