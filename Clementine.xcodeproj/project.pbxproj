@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		501A074E286B5C8C00733BED /* TranscribeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501A074D286B5C8C00733BED /* TranscribeViewModel.swift */; };
 		501A0756286B746700733BED /* Sugar in Frameworks */ = {isa = PBXBuildFile; productRef = 501A0755286B746700733BED /* Sugar */; };
-		50EFB9F1286A0EFE006E3E06 /* Speak2PinyinApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EFB9F0286A0EFE006E3E06 /* Speak2PinyinApp.swift */; };
+		50EFB9F1286A0EFE006E3E06 /* ClementineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EFB9F0286A0EFE006E3E06 /* ClementineApp.swift */; };
 		50EFB9F3286A0EFE006E3E06 /* TranscribeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EFB9F2286A0EFE006E3E06 /* TranscribeView.swift */; };
 		50EFB9F5286A0EFF006E3E06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50EFB9F4286A0EFF006E3E06 /* Assets.xcassets */; };
 		50EFB9F8286A0EFF006E3E06 /* Preview.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50EFB9F7286A0EFF006E3E06 /* Preview.xcassets */; };
@@ -19,8 +19,8 @@
 /* Begin PBXFileReference section */
 		501A074D286B5C8C00733BED /* TranscribeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscribeViewModel.swift; sourceTree = "<group>"; };
 		501A0753286B740100733BED /* Sugar */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Sugar; sourceTree = "<group>"; };
-		50EFB9ED286A0EFE006E3E06 /* Speak2Pinyin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Speak2Pinyin.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		50EFB9F0286A0EFE006E3E06 /* Speak2PinyinApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speak2PinyinApp.swift; sourceTree = "<group>"; };
+		50EFB9ED286A0EFE006E3E06 /* Clementine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Clementine.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		50EFB9F0286A0EFE006E3E06 /* ClementineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClementineApp.swift; sourceTree = "<group>"; };
 		50EFB9F2286A0EFE006E3E06 /* TranscribeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscribeView.swift; sourceTree = "<group>"; };
 		50EFB9F4286A0EFF006E3E06 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		50EFB9F7286A0EFF006E3E06 /* Preview.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Preview.xcassets; sourceTree = "<group>"; };
@@ -52,7 +52,7 @@
 		50EFB9E4286A0EFE006E3E06 = {
 			isa = PBXGroup;
 			children = (
-				50EFB9EF286A0EFE006E3E06 /* Speak2Pinyin */,
+				50EFB9EF286A0EFE006E3E06 /* Clementine */,
 				50EFB9EE286A0EFE006E3E06 /* Products */,
 				50EFBA03286A1E90006E3E06 /* Frameworks */,
 			);
@@ -61,12 +61,12 @@
 		50EFB9EE286A0EFE006E3E06 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				50EFB9ED286A0EFE006E3E06 /* Speak2Pinyin.app */,
+				50EFB9ED286A0EFE006E3E06 /* Clementine.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		50EFB9EF286A0EFE006E3E06 /* Speak2Pinyin */ = {
+		50EFB9EF286A0EFE006E3E06 /* Clementine */ = {
 			isa = PBXGroup;
 			children = (
 				50EFB9FE286A0F56006E3E06 /* Core */,
@@ -74,7 +74,7 @@
 				50EFBA00286A0F67006E3E06 /* Data */,
 				50EFBA01286A0F6C006E3E06 /* Interface */,
 			);
-			path = Speak2Pinyin;
+			path = Clementine;
 			sourceTree = "<group>";
 		};
 		50EFB9F6286A0EFF006E3E06 /* Preview */ = {
@@ -88,7 +88,7 @@
 		50EFB9FF286A0F60006E3E06 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				50EFB9F0286A0EFE006E3E06 /* Speak2PinyinApp.swift */,
+				50EFB9F0286A0EFE006E3E06 /* ClementineApp.swift */,
 				50EFB9F4286A0EFF006E3E06 /* Assets.xcassets */,
 			);
 			path = App;
@@ -129,9 +129,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		50EFB9EC286A0EFE006E3E06 /* Speak2Pinyin */ = {
+		50EFB9EC286A0EFE006E3E06 /* Clementine */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 50EFB9FB286A0EFF006E3E06 /* Build configuration list for PBXNativeTarget "Speak2Pinyin" */;
+			buildConfigurationList = 50EFB9FB286A0EFF006E3E06 /* Build configuration list for PBXNativeTarget "Clementine" */;
 			buildPhases = (
 				50EFB9E9286A0EFE006E3E06 /* Sources */,
 				50EFB9EA286A0EFE006E3E06 /* Frameworks */,
@@ -141,13 +141,13 @@
 			);
 			dependencies = (
 			);
-			name = Speak2Pinyin;
+			name = Clementine;
 			packageProductDependencies = (
 				50EFBA06286A2AF7006E3E06 /* Core */,
 				501A0755286B746700733BED /* Sugar */,
 			);
 			productName = Speak2Pinyin;
-			productReference = 50EFB9ED286A0EFE006E3E06 /* Speak2Pinyin.app */;
+			productReference = 50EFB9ED286A0EFE006E3E06 /* Clementine.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -165,7 +165,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 50EFB9E8286A0EFE006E3E06 /* Build configuration list for PBXProject "Speak2Pinyin" */;
+			buildConfigurationList = 50EFB9E8286A0EFE006E3E06 /* Build configuration list for PBXProject "Clementine" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -180,7 +180,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				50EFB9EC286A0EFE006E3E06 /* Speak2Pinyin */,
+				50EFB9EC286A0EFE006E3E06 /* Clementine */,
 			);
 		};
 /* End PBXProject section */
@@ -204,7 +204,7 @@
 			files = (
 				50EFB9F3286A0EFE006E3E06 /* TranscribeView.swift in Sources */,
 				501A074E286B5C8C00733BED /* TranscribeViewModel.swift in Sources */,
-				50EFB9F1286A0EFE006E3E06 /* Speak2PinyinApp.swift in Sources */,
+				50EFB9F1286A0EFE006E3E06 /* ClementineApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,7 +332,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Speak2Pinyin/Interface/Preview\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Clementine/Interface/Preview\"";
 				DEVELOPMENT_TEAM = 65UTX76JJY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -363,7 +363,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Speak2Pinyin/Interface/Preview\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Clementine/Interface/Preview\"";
 				DEVELOPMENT_TEAM = 65UTX76JJY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -390,7 +390,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		50EFB9E8286A0EFE006E3E06 /* Build configuration list for PBXProject "Speak2Pinyin" */ = {
+		50EFB9E8286A0EFE006E3E06 /* Build configuration list for PBXProject "Clementine" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				50EFB9F9286A0EFF006E3E06 /* Debug */,
@@ -399,7 +399,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		50EFB9FB286A0EFF006E3E06 /* Build configuration list for PBXNativeTarget "Speak2Pinyin" */ = {
+		50EFB9FB286A0EFF006E3E06 /* Build configuration list for PBXNativeTarget "Clementine" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				50EFB9FC286A0EFF006E3E06 /* Debug */,

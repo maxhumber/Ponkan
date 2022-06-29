@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct Speak2PinyinApp: App {
+struct ClementineApp: App {
     var body: some Scene {
         WindowGroup {
             TranscribeView()
