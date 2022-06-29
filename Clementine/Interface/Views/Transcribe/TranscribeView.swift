@@ -18,14 +18,69 @@ struct TranscribeView: View {
     }
     
     private var header: some View {
-        ZStack {
-            Text("100%").opacity(0)
-            if let score = viewModel.score {
-                Text(score)
-                    .foregroundColor(.secondary)
+        HStack {
+            Image(systemName: "person")
+                .foregroundColor(.primary)
+            Spacer()
+            VStack {
+                ZStack {
+                    Text("100%").opacity(0)
+                    Text("10")
+                }
+                .font(.caption.monospacedDigit())
+                ZStack {
+                    Text("score").opacity(0)
+                    Text("words")
+                }
+                .font(.caption2)
             }
+            VStack {
+                ZStack {
+                    Text("100%").opacity(0)
+                    Text("10s")
+                }
+                .font(.caption.monospacedDigit())
+                ZStack {
+                    Text("score").opacity(0)
+                    Text("time")
+                }
+                .font(.caption2)
+                .foregroundColor(.secondary)
+            }
+            VStack {
+                ZStack {
+                    Text("100%").opacity(0)
+                    Text("6.4")
+                }
+                .font(.caption.monospacedDigit())
+                ZStack {
+                    Text("score").opacity(0)
+                    Text("wpm")
+                }
+                .font(.caption2)
+            }
+            VStack {
+                ZStack {
+                    Text("100%").opacity(0)
+                    Text("100%")
+                }
+                .font(.caption.monospacedDigit())
+                ZStack {
+                    Text("score").opacity(0)
+                    Text("score")
+                }
+                .font(.caption2)
+            }
+            Spacer()
+            Image(systemName: "strikethrough")
+                .foregroundColor(.primary)
         }
+        .foregroundColor(.secondary)
         .padding()
+    }
+    
+    private func statistic(value: String, label: String) -> some View {
+        Text("")
     }
     
     private var content: some View {
@@ -48,7 +103,7 @@ struct TranscribeView: View {
         }
     }
     
-    private func makeLabel(_ fragment: TranscriptFragment) -> some View {
+    private func makeLabel(_ fragment: Fragment) -> some View {
         VStack {
             Text(fragment.correction ?? "")
                 .font(.caption)
@@ -66,9 +121,7 @@ struct TranscribeView: View {
     
     private var footer: some View {
         HStack(spacing: 30) {
-            Image(systemName: "xmark")
             micButton
-            Image(systemName: "xmark")
         }
     }
     

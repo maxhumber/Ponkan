@@ -42,8 +42,8 @@ public final class TranscriptionService {
     ///
     /// Example:
     /// ```
-    /// try await transcriber.start()
-    /// for try await transcription in transcriber.transcribe() {
+    /// try await service.start()
+    /// for try await transcription in service.transcribe() {
     ///    if let transcription {
     ///        print(transcription)
     ///    }
