@@ -2,8 +2,15 @@ import SwiftUI
 import Core
 import Sugar
 
+extension ColorScheme {
+    var isDark: Bool {
+        self == .dark
+    }
+}
+
 struct TranscribeView: View {
-    @StateObject var viewModel: TranscribeViewModel
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
+    @StateObject private var viewModel: TranscribeViewModel
     
     init(_ text: String = "", active: Bool = false) {
         self._viewModel = StateObject(wrappedValue: .init(text, active: active))
@@ -48,22 +55,28 @@ struct TranscribeView: View {
                 $0.foregroundColor = .primary
                 $0.strikethroughStyle = Text.LineStyle(pattern: .solid, color: .red)
             }
-            .padding(5)
+            .padding(.horizontal, 5)
             .background(
-                Color.red.opacity(0.15)
+                RoundedRectangle(cornerRadius: 4)
+                    .foregroundColor(pinkishColor)
             )
         }
+        .opacity(0)
     }
     
     @ViewBuilder private var headerContent: some View {
-        if viewModel.active {
-            Image(systemName: "circle.fill")
-                .foregroundColor(.red)
-        } else if viewModel.fragments.isEmpty {
-            Text("ready")
-                .foregroundColor(.secondary)
-        } else {
+        ZStack {
             statistics
+                .opacity(0)
+            if viewModel.active {
+                Image(systemName: "circle.fill")
+                    .foregroundColor(.red)
+            } else if viewModel.fragments.isEmpty {
+                Text("")
+                    .foregroundColor(.secondary)
+            } else {
+                statistics
+            }
         }
     }
     
@@ -119,16 +132,24 @@ struct TranscribeView: View {
                 .opacity(0)
             Text(fragment.pinyin) {
                 $0.strikethroughStyle = Text.LineStyle(pattern: .solid, color: fragment.flagged ? .red : .clear)
-                $0.backgroundColor = fragment.flagged ? .red.opacity(0.15) : .clear
             }
             .font(.title)
+            .padding(.horizontal, 5)
+            .background(
+                RoundedRectangle(cornerRadius: 4)
+                    .foregroundColor(fragment.flagged ? pinkishColor : .clear)
+            )
             // .font(.title2)
             // INCREASE / DECREASE TEXT SIZE
         }
         // FIX PADDING FOR THINGS THAT LEAD PUNCTUATION...
-        .padding(EdgeInsets(top: 10, leading: fragment.isPunctuation ? 0 : 0, bottom: 10, trailing: 15))
+        .padding(EdgeInsets(top: 10, leading: fragment.isPunctuation ? 0 : 0, bottom: 10, trailing: 5))
         .foregroundColor(fragment.isPunctuation ? .secondary.opacity(0.45) : .primary)
         .foregroundColor(.primary)
+    }
+    
+    private var pinkishColor: Color {
+        colorScheme.isDark ? .red.opacity(0.55) : .red.opacity(0.15)
     }
     
     private var footer: some View {
