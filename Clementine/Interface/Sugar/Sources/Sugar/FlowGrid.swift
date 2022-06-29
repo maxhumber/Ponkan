@@ -48,7 +48,7 @@ public struct FlowGrid<Content: View>: View {
     }
 }
 
-struct DynamicVStack_Previews: PreviewProvider {
+struct FlowGrid_Previews: PreviewProvider {
     static var previews: some View {
         ScrollView(showsIndicators: false) {
             FlowGrid {

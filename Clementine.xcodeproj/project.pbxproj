@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		501A074E286B5C8C00733BED /* TranscribeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501A074D286B5C8C00733BED /* TranscribeViewModel.swift */; };
 		501A0756286B746700733BED /* Sugar in Frameworks */ = {isa = PBXBuildFile; productRef = 501A0755286B746700733BED /* Sugar */; };
+		501A2027286C9DFF00EE1182 /* CorrectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501A2026286C9DFF00EE1182 /* CorrectionView.swift */; };
 		50EFB9F1286A0EFE006E3E06 /* ClementineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EFB9F0286A0EFE006E3E06 /* ClementineApp.swift */; };
 		50EFB9F3286A0EFE006E3E06 /* TranscribeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EFB9F2286A0EFE006E3E06 /* TranscribeView.swift */; };
 		50EFB9F5286A0EFF006E3E06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50EFB9F4286A0EFF006E3E06 /* Assets.xcassets */; };
@@ -19,6 +20,7 @@
 /* Begin PBXFileReference section */
 		501A074D286B5C8C00733BED /* TranscribeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscribeViewModel.swift; sourceTree = "<group>"; };
 		501A0753286B740100733BED /* Sugar */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Sugar; sourceTree = "<group>"; };
+		501A2026286C9DFF00EE1182 /* CorrectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorrectionView.swift; sourceTree = "<group>"; };
 		50EFB9ED286A0EFE006E3E06 /* Clementine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Clementine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50EFB9F0286A0EFE006E3E06 /* ClementineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClementineApp.swift; sourceTree = "<group>"; };
 		50EFB9F2286A0EFE006E3E06 /* TranscribeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscribeView.swift; sourceTree = "<group>"; };
@@ -47,6 +49,14 @@
 				501A074D286B5C8C00733BED /* TranscribeViewModel.swift */,
 			);
 			path = Transcribe;
+			sourceTree = "<group>";
+		};
+		501A2025286C9DF500EE1182 /* Correction */ = {
+			isa = PBXGroup;
+			children = (
+				501A2026286C9DFF00EE1182 /* CorrectionView.swift */,
+			);
+			path = Correction;
 			sourceTree = "<group>";
 		};
 		50EFB9E4286A0EFE006E3E06 = {
@@ -114,6 +124,7 @@
 		50EFBA02286A0F83006E3E06 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				501A2025286C9DF500EE1182 /* Correction */,
 				501A074C286B524A00733BED /* Transcribe */,
 			);
 			path = Views;
@@ -204,6 +215,7 @@
 			files = (
 				50EFB9F3286A0EFE006E3E06 /* TranscribeView.swift in Sources */,
 				501A074E286B5C8C00733BED /* TranscribeViewModel.swift in Sources */,
+				501A2027286C9DFF00EE1182 /* CorrectionView.swift in Sources */,
 				50EFB9F1286A0EFE006E3E06 /* ClementineApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -336,8 +348,8 @@
 				DEVELOPMENT_TEAM = 65UTX76JJY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = Stuff;
-				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "More Stuff";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To listen to your pronounciation.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "To decipher your words and show them on screen within the app.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -367,8 +379,8 @@
 				DEVELOPMENT_TEAM = 65UTX76JJY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = Stuff;
-				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "More Stuff";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To listen to your pronounciation.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "To decipher your words and show them on screen within the app.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
