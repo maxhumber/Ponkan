@@ -1,9 +1,9 @@
-import AVFoundation
+// Contrast with: https://developer.apple.com/tutorials/app-dev-training/transcribing-speech-to-text
+
 import Foundation
 import Speech
 
-/// A Multi-lingual Language Transcriber using AVFoundation + Speech
-public final class Transcriber: Transcribing {
+public final class TranscriptionService {
     private let recognizer: SFSpeechRecognizer
     private let bus: AVAudioNodeBus
     private let frames: AVAudioFrameCount
@@ -11,37 +11,24 @@ public final class Transcriber: Transcribing {
     private var engine: AVAudioEngine!
     private var request: SFSpeechAudioBufferRecognitionRequest!
     
-    /// Initialize transcriber
+    /// Initialize service
     /// - Parameters:
-    ///   - locale: Local identifier to use (see: https://www.apple.com/ios/feature-availability/#quicktype-keyboard-dictation)
+    ///   - language: Languages with on-device support (or other identifier, see: https://www.apple.com/ios/feature-availability/#quicktype-keyboard-dictation)
     ///   - bus: Bus onto which the request will be installed
     ///   - frames: BufferSize for the SFSpeechAudioBufferRecognitionRequest
     ///   - session: AVAudioSession used to capture audio
-    public init(locale: String = "en-US", bus: AVAudioNodeBus = 0, frames: AVAudioFrameCount = 1024, session: AVAudioSession = .sharedInstance()) {
-        self.recognizer = SFSpeechRecognizer(locale: .init(identifier: locale))!
-        self.bus = bus
-        self.frames = frames
-        self.session = session
-    }
-    
-    /// Initialize transcriber
-    /// - Parameters:
-    ///   - language: Language with on-device support
-    ///   - bus: Bus onto which the request will be installed
-    ///   - frames: BufferSize for the SFSpeechAudioBufferRecognitionRequest
-    ///   - session: AVAudioSession used to capture audio
-    public init(_ language: TranscriberLanguage = .english(), bus: AVAudioNodeBus = 0, frames: AVAudioFrameCount = 1024, session: AVAudioSession = .sharedInstance()) {
+    public init(_ language: Language = .english, bus: AVAudioNodeBus = 0, frames: AVAudioFrameCount = 1024, session: AVAudioSession = .sharedInstance()) {
         self.recognizer = SFSpeechRecognizer(locale: .init(identifier: language.code))!
         self.bus = bus
         self.frames = frames
         self.session = session
     }
     
-    /// Start transcription
+    /// Start service
     public func start() async throws {
-        guard recognizer.isAvailable else { throw TranscriberError.notAvailable }
-        guard await recognizer.isAuthorizedToRecognize() else { throw TranscriberError.notAuthorizedToRecognizeSpeech }
-        guard await session.isAuthorizedToRecord() else { throw TranscriberError.notAuthorizedToRecordAudio }
+        guard recognizer.isAvailable else { throw TranscriptionServiceError.notAvailable }
+        guard await recognizer.isAuthorizedToRecognize() else { throw TranscriptionServiceError.notAuthorizedToRecognizeSpeech }
+        guard await session.isAuthorizedToRecord() else { throw TranscriptionServiceError.notAuthorizedToRecordAudio }
         engine = AVAudioEngine()
         request = SFSpeechAudioBufferRecognitionRequest(engine, bus, frames)
         try session.setCategory(.record, mode: .measurement, options: .duckOthers)
@@ -50,8 +37,9 @@ public final class Transcriber: Transcribing {
         try engine.start()
     }
     
-    /// Transcribe audio
+    /// Transcribe audio stream
     /// - Returns: An async throwing stream of (optional) strings
+    ///
     /// Example:
     /// ```
     /// try await transcriber.start()
@@ -62,10 +50,16 @@ public final class Transcriber: Transcribing {
     /// }
     /// ```
     public func transcribe() -> AsyncThrowingStream<String?, Error> {
-        recognizer.stream(request)
+        AsyncThrowingStream { continuation in
+            recognizer.recognitionTask(with: request) { result, error in
+                if error != nil { continuation.finish(throwing: error) }
+                if result?.isFinal == true { continuation.finish() }
+                continuation.yield(result?.bestTranscription.formattedString)
+            }
+        }
     }
     
-    /// Stop transcription
+    /// Stop service
     public func stop() {
         engine?.stop()
         engine?.inputNode.removeTap(onBus: bus)

@@ -1,4 +1,5 @@
 import SwiftUI
+import Core
 import Sugar
 
 struct TranscribeView: View {
@@ -34,7 +35,7 @@ struct TranscribeView: View {
     
     private var content: some View {
         ScrollView(showsIndicators: false) {
-            FlowStack {
+            FlowGrid {
                 ForEach($viewModel.blocks) { $block in
                     Button {
                         block.flagged.toggle()
@@ -48,7 +49,7 @@ struct TranscribeView: View {
         }
     }
     
-    private func makeLabel(_ block: TranscriptedBlock) -> some View {
+    private func makeLabel(_ block: TranscriptFragment) -> some View {
         VStack {
             Text(block.pinyin)
                 .font(.caption)
@@ -58,8 +59,8 @@ struct TranscribeView: View {
             }
             .font(.title)
         }
-        .padding(block.kind == .punctuation ? 0 : 10)
-        .foregroundColor(block.kind == .punctuation ? .secondary : .primary)
+        .padding(block.isPunctuation ? 0 : 10)
+        .foregroundColor(block.isPunctuation ? .secondary : .primary)
         .foregroundColor(.primary)
     }
     

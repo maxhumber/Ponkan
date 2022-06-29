@@ -1,6 +1,6 @@
 import Foundation
 
-public enum TranscriberError: Error {
+public enum TranscriptionServiceError: Error {
     case notAvailable
     case notAuthorizedToRecognizeSpeech
     case notAuthorizedToRecordAudio

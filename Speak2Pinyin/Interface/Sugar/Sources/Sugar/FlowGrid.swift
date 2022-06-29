@@ -1,13 +1,10 @@
-//  Inspired by: https://gist.github.com/vanwagonet/8fb54066b29a9c700e446dde62a9eb73
-
 import SwiftUI
 
-public struct FlowStack<Content: View>: View {
-    private let viewModel: ViewModel
+public struct FlowGrid<Content: View>: View {
+    private let viewModel = ViewModel()
     private let content: () -> Content
     
-    public init(spacing: CGSize = .zero, @ViewBuilder content: @escaping () -> Content) {
-        self.viewModel = .init(spacing: spacing)
+    public init(@ViewBuilder _ content: @escaping () -> Content) {
         self.content = content
     }
     
@@ -15,34 +12,27 @@ public struct FlowStack<Content: View>: View {
         ZStack(alignment: .topLeading) {
             Color.clear
                 .frame(height: 0)
-                .alignmentGuide(.top) { viewModel.alignSpanner($0) }
+                .alignmentGuide(.top) { viewModel.measure($0) }
             content()
-                .alignmentGuide(.leading) { viewModel.alignLeading($0) }
-                .alignmentGuide(.top) { viewModel.alignTop($0) }
+                .alignmentGuide(.leading) { viewModel.postition($0) }
+                .alignmentGuide(.top) { viewModel.offset($0) }
         }
     }
     
     final class ViewModel {
-        private var spacing: CGSize
-        private var available: CGFloat
-        private var x: CGFloat
-        private var y: CGFloat
+        private var spacing: CGSize = .zero
+        private var available: CGFloat = .zero
+        private var x: CGFloat = .zero
+        private var y: CGFloat = .zero
         
-        init(spacing: CGSize, available: CGFloat = .zero, x: CGFloat = .zero, y: CGFloat = .zero) {
-            self.spacing = spacing
-            self.available = available
-            self.x = x
-            self.y = y
-        }
-        
-        func alignSpanner(_ item: ViewDimensions) -> CGFloat {
+        func measure(_ item: ViewDimensions) -> CGFloat {
             available = item.width
             x = 0
             y = 0
             return 0
         }
         
-        func alignLeading(_ item: ViewDimensions) -> CGFloat {
+        func postition(_ item: ViewDimensions) -> CGFloat {
             if x + item.width > available {
                 x = 0
                 y += item.height + spacing.height
@@ -52,16 +42,16 @@ public struct FlowStack<Content: View>: View {
             return -result
         }
         
-        func alignTop(_ item: ViewDimensions) -> CGFloat {
+        func offset(_ item: ViewDimensions) -> CGFloat {
             -y
         }
     }
 }
 
-struct FlowStack_Previews: PreviewProvider {
+struct DynamicVStack_Previews: PreviewProvider {
     static var previews: some View {
         ScrollView(showsIndicators: false) {
-            FlowStack {
+            FlowGrid {
                 ForEach(1..<52+1) { num in
                     ZStack {
                         Text("99").opacity(0)

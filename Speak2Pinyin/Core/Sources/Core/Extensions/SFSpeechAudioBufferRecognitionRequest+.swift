@@ -1,4 +1,3 @@
-import AVFoundation
 import Speech
 
 extension SFSpeechAudioBufferRecognitionRequest {

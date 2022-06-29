@@ -4,22 +4,24 @@ import Speech
 import Core
 
 @MainActor final class TranscribeViewModel: ObservableObject {
-    @Published var blocks = [TranscriptedBlock]()
+    @Published var blocks = [TranscriptFragment]()
     @Published var active = false
     private var task: Task<Void, Never>? = nil
-    private let transcriber: any Transcribing = Transcriber(.mandarin)
+    private let transcriber = TranscriptionService(.mandarin)
     
     init(transcription: String = "", active: Bool = false) {
         self.blocks = blockify(transcription)
         self.active = active
     }
     
-    private func blockify(_ text: String) -> [TranscriptedBlock] {
-        text.explode().filter { !$0.isWhitespace }.map { TranscriptedBlock($0) }
+    private func blockify(_ text: String) -> [TranscriptFragment] {
+        text.atomize()
+            .filter { !$0.isWhitespace }
+            .map { TranscriptFragment($0) }
     }
     
     var score: String? {
-        let validBlocks = blocks.filter { $0.kind == .chinese }
+        let validBlocks = blocks.filter { $0.isChinese }
         if validBlocks.isEmpty || active { return nil }
         let wrong = validBlocks.filter { $0.flagged }.count
         let total = validBlocks.count

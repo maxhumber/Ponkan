@@ -1,33 +1,38 @@
 import Foundation
 
 extension String {
-    public func explode() -> [String] {
+    public func pinyin() -> String {
+        if isEmpty { return "" }
+        let cfString = CFStringCreateMutableCopy(nil, 0, self as CFString)
+        CFStringTransform(cfString, nil, kCFStringTransformToLatin, false)
+        return cfString! as String
+    }
+    
+    public func atomize() -> [String] {
         var words = [String]()
         enumerateSubstrings(in: startIndex..., options: .byWords) { substring, range, enclosedRange, _ in
             words.append(substring!)
-            let start = range.upperBound
-            let end = enclosedRange.upperBound
-            words += self[start..<end]
+            words += self[range.upperBound..<enclosedRange.upperBound]
                 .split { $0.isWhitespace }
                 .map { String($0) }
         }
         return words
     }
     
-    public var isChinese: Bool {
-        guard range(of: "\\p{Han}*\\p{Han}", options: .regularExpression) != nil else { return false }
-        return true
-    }
-    
-    public var isNumber: Bool {
-        !isEmpty && rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil
-    }
-    
     public var isWhitespace: Bool {
         rangeOfCharacter(from: .whitespacesAndNewlines) != nil
     }
     
-    public var isPunctuation: Bool {
+    var isChinese: Bool {
+        guard range(of: "\\p{Han}*\\p{Han}", options: .regularExpression) != nil else { return false }
+        return true
+    }
+    
+    var isNumber: Bool {
+        !isEmpty && rangeOfCharacter(from: .decimalDigits.inverted) == nil
+    }
+    
+    var isPunctuation: Bool {
         map { $0 }.allSatisfy { $0.isPunctuation }
     }
 }
