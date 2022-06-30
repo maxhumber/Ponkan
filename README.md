@@ -1,7 +1,7 @@
 <div align="center">
   <img alt="ponkan" src="https://raw.githubusercontent.com/maxhumber/Ponkan/master/Images/logo.png" height="200px">
 </div>
-<div align="center">
+
 
 ### About
 
