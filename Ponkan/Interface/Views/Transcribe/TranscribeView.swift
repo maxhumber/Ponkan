@@ -176,7 +176,7 @@ struct TranscribeView: View {
                     .font(.largeTitle)
                     .layoutPriority(1)
                     .opacity(0)
-                Image("clementine")
+                Image("orange")
                     .resizable()
                     .layoutPriority(-1)
                     .scaleEffect(1.5)

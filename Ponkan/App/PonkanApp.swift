@@ -2,7 +2,7 @@ import SwiftUI
 import Core
 
 @main
-struct ClementineApp: App {
+struct PonkanApp: App {
     var body: some Scene {
         WindowGroup {
             TranscribeView()

@@ -10,7 +10,7 @@
 		501A074E286B5C8C00733BED /* TranscribeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501A074D286B5C8C00733BED /* TranscribeViewModel.swift */; };
 		501A0756286B746700733BED /* Sugar in Frameworks */ = {isa = PBXBuildFile; productRef = 501A0755286B746700733BED /* Sugar */; };
 		501A2027286C9DFF00EE1182 /* CorrectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501A2026286C9DFF00EE1182 /* CorrectionView.swift */; };
-		50EFB9F1286A0EFE006E3E06 /* ClementineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EFB9F0286A0EFE006E3E06 /* ClementineApp.swift */; };
+		50EFB9F1286A0EFE006E3E06 /* PonkanApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EFB9F0286A0EFE006E3E06 /* PonkanApp.swift */; };
 		50EFB9F3286A0EFE006E3E06 /* TranscribeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EFB9F2286A0EFE006E3E06 /* TranscribeView.swift */; };
 		50EFB9F5286A0EFF006E3E06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50EFB9F4286A0EFF006E3E06 /* Assets.xcassets */; };
 		50EFB9F8286A0EFF006E3E06 /* Preview.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50EFB9F7286A0EFF006E3E06 /* Preview.xcassets */; };
@@ -21,8 +21,8 @@
 		501A074D286B5C8C00733BED /* TranscribeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscribeViewModel.swift; sourceTree = "<group>"; };
 		501A0753286B740100733BED /* Sugar */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Sugar; sourceTree = "<group>"; };
 		501A2026286C9DFF00EE1182 /* CorrectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorrectionView.swift; sourceTree = "<group>"; };
-		50EFB9ED286A0EFE006E3E06 /* Clementine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Clementine.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		50EFB9F0286A0EFE006E3E06 /* ClementineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClementineApp.swift; sourceTree = "<group>"; };
+		50EFB9ED286A0EFE006E3E06 /* Ponkan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ponkan.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		50EFB9F0286A0EFE006E3E06 /* PonkanApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PonkanApp.swift; sourceTree = "<group>"; };
 		50EFB9F2286A0EFE006E3E06 /* TranscribeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscribeView.swift; sourceTree = "<group>"; };
 		50EFB9F4286A0EFF006E3E06 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		50EFB9F7286A0EFF006E3E06 /* Preview.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Preview.xcassets; sourceTree = "<group>"; };
@@ -62,7 +62,7 @@
 		50EFB9E4286A0EFE006E3E06 = {
 			isa = PBXGroup;
 			children = (
-				50EFB9EF286A0EFE006E3E06 /* Clementine */,
+				50EFB9EF286A0EFE006E3E06 /* Ponkan */,
 				50EFB9EE286A0EFE006E3E06 /* Products */,
 				50EFBA03286A1E90006E3E06 /* Frameworks */,
 			);
@@ -71,12 +71,12 @@
 		50EFB9EE286A0EFE006E3E06 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				50EFB9ED286A0EFE006E3E06 /* Clementine.app */,
+				50EFB9ED286A0EFE006E3E06 /* Ponkan.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		50EFB9EF286A0EFE006E3E06 /* Clementine */ = {
+		50EFB9EF286A0EFE006E3E06 /* Ponkan */ = {
 			isa = PBXGroup;
 			children = (
 				50EFB9FE286A0F56006E3E06 /* Core */,
@@ -84,7 +84,7 @@
 				50EFBA00286A0F67006E3E06 /* Data */,
 				50EFBA01286A0F6C006E3E06 /* Interface */,
 			);
-			path = Clementine;
+			path = Ponkan;
 			sourceTree = "<group>";
 		};
 		50EFB9F6286A0EFF006E3E06 /* Preview */ = {
@@ -98,7 +98,7 @@
 		50EFB9FF286A0F60006E3E06 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				50EFB9F0286A0EFE006E3E06 /* ClementineApp.swift */,
+				50EFB9F0286A0EFE006E3E06 /* PonkanApp.swift */,
 				50EFB9F4286A0EFF006E3E06 /* Assets.xcassets */,
 			);
 			path = App;
@@ -140,9 +140,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		50EFB9EC286A0EFE006E3E06 /* Clementine */ = {
+		50EFB9EC286A0EFE006E3E06 /* Ponkan */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 50EFB9FB286A0EFF006E3E06 /* Build configuration list for PBXNativeTarget "Clementine" */;
+			buildConfigurationList = 50EFB9FB286A0EFF006E3E06 /* Build configuration list for PBXNativeTarget "Ponkan" */;
 			buildPhases = (
 				50EFB9E9286A0EFE006E3E06 /* Sources */,
 				50EFB9EA286A0EFE006E3E06 /* Frameworks */,
@@ -152,13 +152,13 @@
 			);
 			dependencies = (
 			);
-			name = Clementine;
+			name = Ponkan;
 			packageProductDependencies = (
 				50EFBA06286A2AF7006E3E06 /* Core */,
 				501A0755286B746700733BED /* Sugar */,
 			);
 			productName = Speak2Pinyin;
-			productReference = 50EFB9ED286A0EFE006E3E06 /* Clementine.app */;
+			productReference = 50EFB9ED286A0EFE006E3E06 /* Ponkan.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -176,7 +176,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 50EFB9E8286A0EFE006E3E06 /* Build configuration list for PBXProject "Clementine" */;
+			buildConfigurationList = 50EFB9E8286A0EFE006E3E06 /* Build configuration list for PBXProject "Ponkan" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -191,7 +191,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				50EFB9EC286A0EFE006E3E06 /* Clementine */,
+				50EFB9EC286A0EFE006E3E06 /* Ponkan */,
 			);
 		};
 /* End PBXProject section */
@@ -216,7 +216,7 @@
 				50EFB9F3286A0EFE006E3E06 /* TranscribeView.swift in Sources */,
 				501A074E286B5C8C00733BED /* TranscribeViewModel.swift in Sources */,
 				501A2027286C9DFF00EE1182 /* CorrectionView.swift in Sources */,
-				50EFB9F1286A0EFE006E3E06 /* ClementineApp.swift in Sources */,
+				50EFB9F1286A0EFE006E3E06 /* PonkanApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,11 +344,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Clementine/Interface/Preview\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Ponkan/Interface/Preview\"";
 				DEVELOPMENT_TEAM = 65UTX76JJY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = Clementine;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To listen to your pronounciation.";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "To decipher your words and show them on screen within the app.";
@@ -362,7 +361,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ltd.bracket.clementine;
+				PRODUCT_BUNDLE_IDENTIFIER = ltd.bracket.ponkan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -380,11 +379,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Clementine/Interface/Preview\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Ponkan/Interface/Preview\"";
 				DEVELOPMENT_TEAM = 65UTX76JJY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = Clementine;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To listen to your pronounciation.";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "To decipher your words and show them on screen within the app.";
@@ -398,7 +396,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ltd.bracket.clementine;
+				PRODUCT_BUNDLE_IDENTIFIER = ltd.bracket.ponkan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -412,7 +410,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		50EFB9E8286A0EFE006E3E06 /* Build configuration list for PBXProject "Clementine" */ = {
+		50EFB9E8286A0EFE006E3E06 /* Build configuration list for PBXProject "Ponkan" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				50EFB9F9286A0EFF006E3E06 /* Debug */,
@@ -421,7 +419,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		50EFB9FB286A0EFF006E3E06 /* Build configuration list for PBXNativeTarget "Clementine" */ = {
+		50EFB9FB286A0EFF006E3E06 /* Build configuration list for PBXNativeTarget "Ponkan" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				50EFB9FC286A0EFF006E3E06 /* Debug */,
