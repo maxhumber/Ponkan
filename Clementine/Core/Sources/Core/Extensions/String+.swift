@@ -24,6 +24,10 @@ extension String {
         rangeOfCharacter(from: .whitespacesAndNewlines) != nil
     }
     
+    public var isPunctuation: Bool {
+        map { $0 }.allSatisfy { $0.isPunctuation }
+    }
+    
     var isChinese: Bool {
         guard range(of: "\\p{Han}*\\p{Han}", options: .regularExpression) != nil else { return false }
         return true
@@ -31,9 +35,5 @@ extension String {
     
     var isNumber: Bool {
         !isEmpty && rangeOfCharacter(from: .decimalDigits.inverted) == nil
-    }
-    
-    var isPunctuation: Bool {
-        map { $0 }.allSatisfy { $0.isPunctuation }
     }
 }

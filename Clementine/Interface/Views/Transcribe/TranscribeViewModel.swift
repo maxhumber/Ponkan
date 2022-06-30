@@ -6,22 +6,30 @@ import Core
 @MainActor final class TranscribeViewModel: ObservableObject {
     @Published var selectedFragment: Fragment?
     @Published var fragments = [Fragment]()
-    @Published var active = false
+    @Published var listening = false
     @Published var correcting = false
     @Published var stopwatch = Stopwatch()
+    @Published var error: Error?
     
     private let service = TranscriptionService(.mandarin)
     private var task: Task<Void, Never>?
     
     init(_ text: String = "", active: Bool = false) {
         self.fragments = fragmentize(text)
-        self.active = active
+        self.listening = active
     }
     
     private func fragmentize(_ text: String) -> [Fragment] {
-        text.atomize()
-            .filter { !$0.isWhitespace }
-            .map { Fragment($0) }
+        let atoms = text.atomize().filter({ !$0.isWhitespace })
+        var fragments = [Fragment]()
+        for (a, b) in zip(atoms, atoms.dropFirst(1)) {
+            let fragment = Fragment(a, precedesPunctuation: b.isPunctuation)
+            fragments.append(fragment)
+        }
+        if let last = atoms.last {
+            fragments.append(Fragment(last))
+        }
+        return fragments
     }
     
     private var validFragments: [Fragment] {
@@ -59,17 +67,21 @@ import Core
     
     var stringScore: String {
         guard let score else { return "?" }
-        return formatter.string(from: NSNumber(value: score)) ?? "?"
+        return percentFormatter.string(from: NSNumber(value: score)) ?? "?"
     }
     
     func toggle() {
-        active ? stop() : start()
+        listening ? stop() : start()
+    }
+    
+    func clearFragments() {
+        fragments = []
     }
     
     private func start() {
         fragments = []
         stopwatch.start()
-        active = true
+        listening = true
         task = Task(priority: .userInitiated) {
             do {
                 try await service.start()
@@ -79,6 +91,7 @@ import Core
                     }
                 }
             } catch {
+                self.error = error
                 stop()
             }
         }
@@ -89,10 +102,10 @@ import Core
         service.stop()
         task?.cancel()
         task = nil
-        active = false
+        listening = false
     }
     
-    private let formatter: NumberFormatter = {
+    private let percentFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .percent
         formatter.minimumIntegerDigits = 1

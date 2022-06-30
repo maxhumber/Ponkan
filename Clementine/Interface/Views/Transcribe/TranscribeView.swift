@@ -2,12 +2,6 @@ import SwiftUI
 import Core
 import Sugar
 
-extension ColorScheme {
-    var isDark: Bool {
-        self == .dark
-    }
-}
-
 struct TranscribeView: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     @StateObject private var viewModel: TranscribeViewModel
@@ -22,6 +16,7 @@ struct TranscribeView: View {
             content
             footer
         }
+        .errorAlert(error: $viewModel.error)
     }
     
     private var header: some View {
@@ -29,7 +24,7 @@ struct TranscribeView: View {
             HStack {
                 accountButton
                 Spacer()
-                strikeButton
+                junkButton
             }
             headerContent
         }
@@ -64,15 +59,25 @@ struct TranscribeView: View {
         .opacity(0)
     }
     
+    private var junkButton: some View {
+        Button {
+            viewModel.clearFragments()
+        } label: {
+            Image(systemName: "xmark.bin")
+                .foregroundColor(.red.opacity(0.65))
+        }
+        .opacity(viewModel.fragments.isEmpty || viewModel.listening ? 0 : 1)
+    }
+    
     @ViewBuilder private var headerContent: some View {
         ZStack {
             statistics
                 .opacity(0)
-            if viewModel.active {
+            if viewModel.listening {
                 Image(systemName: "circle.fill")
                     .foregroundColor(.red)
             } else if viewModel.fragments.isEmpty {
-                Text("")
+                Text("Chinese → Pinyin")
                     .foregroundColor(.secondary)
             } else {
                 statistics
@@ -128,7 +133,7 @@ struct TranscribeView: View {
                 } label: {
                     makeLabel(fragment)
                 }
-                .disabled(viewModel.active)
+                .disabled(viewModel.listening || fragment.isPunctuation)
                 .id(fragment.id)
             }
         }
@@ -141,44 +146,43 @@ struct TranscribeView: View {
                 .font(.caption)
                 .opacity(0)
             Text(fragment.pinyin) {
+                $0.foregroundColor = fragment.isPunctuation ? .secondary.opacity(0.60) : .primary
                 $0.strikethroughStyle = Text.LineStyle(pattern: .solid, color: fragment.flagged ? .red : .clear)
             }
             .font(.title)
-            .padding(.horizontal, 5)
+            .padding(EdgeInsets(top: 0, leading: 5, bottom: 0, trailing: fragment.isPunctuation ? -5 : 5))
             .background(
                 RoundedRectangle(cornerRadius: 4)
                     .foregroundColor(fragment.flagged ? pinkishColor : .clear)
             )
-            // .font(.title2)
-            // INCREASE / DECREASE TEXT SIZE
         }
-        // FIX PADDING FOR THINGS THAT LEAD PUNCTUATION...
-        .padding(EdgeInsets(top: 10, leading: fragment.isPunctuation ? 0 : 0, bottom: 10, trailing: 5))
-        .foregroundColor(fragment.isPunctuation ? .secondary.opacity(0.60) : .primary)
+        .padding(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: fragment.precedesPunctuation ? -5 : 5))
     }
     
     private var pinkishColor: Color {
-        colorScheme.isDark ? .pink.opacity(0.40) : .red.opacity(0.15)
+        colorScheme == .dark ? .pink.opacity(0.40) : .red.opacity(0.15)
     }
     
     private var footer: some View {
-        HStack(spacing: 30) {
-            micButton
-        }
+        micButton
     }
     
     private var micButton: some View {
         Button {
             viewModel.toggle()
         } label: {
-            Image(systemName: viewModel.active ? "mic.slash" : "mic")
-                .font(.title3)
-                .foregroundColor(.white)
-                .padding(20)
-                .background(
-                    Circle().foregroundColor(viewModel.active ? .red : .orange)
-                        .shadow(radius: 2, x: 0, y: 3)
-                )
+            ZStack {
+                Image(systemName: "circle")
+                    .font(.largeTitle)
+                    .layoutPriority(1)
+                    .opacity(0)
+                Image("clementine")
+                    .resizable()
+                    .layoutPriority(-1)
+                    .scaleEffect(1.5)
+                    .shadow(radius: 1, y: 1)
+            }
+            .padding(20)
         }
     }
 }
