@@ -7,7 +7,7 @@
 
 Hi, I'm Max! I made Ponkan to help me study Mandarin. *Nǐ hǎo, wǒ jiào Max! Wǒ zhìzuò “Ponkan” yīnwèi wǒ yào xuéxí zhōngwén.* (Obviously, I still have a long way to go!)
 
-Ponkan is a speech-to-text app that converts Mandarin Chinese to [Pinyin](https://en.wikipedia.org/wiki/Pinyin), in real time<sup>†</sup> The app is for beginners who like and need immediate feedback while practising in order to correct and improve pronunciation. 
+Ponkan is a speech-to-text app that converts Mandarin Chinese to [Pinyin](https://en.wikipedia.org/wiki/Pinyin), in real time<sup>†</sup> The app is intended for beginners who like (and need) immediate feedback while practising in order to correct and improve pronunciation. 
 
 I use Ponkan to practise my Mandarin in the same way that I use [MonkeyType](https://monkeytype.com/) to improve my typing. 
 
