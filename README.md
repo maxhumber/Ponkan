@@ -22,11 +22,11 @@ I use Ponkan to practise my Mandarin in the same way that I use [MonkeyType](htt
 ### Screenshots
 
 <h3>
-  <img src="https://raw.githubusercontent.com/maxhumber/BreadBuddy/master/Marketing/Screenshots/screenshot_13pm_1.png" height="300px" alt="BreadBuddy1">
-  <img src="https://raw.githubusercontent.com/maxhumber/BreadBuddy/master/Marketing/Screenshots/screenshot_13pm_2.png" height="300px" alt="BreadBuddy2">
-  <img src="https://raw.githubusercontent.com/maxhumber/BreadBuddy/master/Marketing/Screenshots/screenshot_13pm_3.png" height="300px" alt="BreadBuddy3">
-  <img src="https://raw.githubusercontent.com/maxhumber/BreadBuddy/master/Marketing/Screenshots/screenshot_13pm_4.png" height="300px" alt="BreadBuddy4">
+  <img src="https://raw.githubusercontent.com/maxhumber/Ponkan/master/Marketing/Screenshots/screenshot1.png" height="300px" alt="Ponkan1">
+  <img src="https://raw.githubusercontent.com/maxhumber/Ponkan/master/Marketing/Screenshots/screenshot2.png" height="300px" alt="Ponkan2">
+  <img src="https://raw.githubusercontent.com/maxhumber/Ponkan/master/Marketing/Screenshots/screenshot3.png" height="300px" alt="Ponkan3">
 </h3>
+
 
 
 
