@@ -57,7 +57,7 @@ public struct PinyinKeys: View {
     
     private func modify(_ newValue: String) {
         var string = newValue
-        guard let accent, let character = string.popLast() else { return }
+        guard let accent = accent, let character = string.popLast() else { return }
         let modifiedCharacter = accent.modify(character)
         self.text = "\(string)\(modifiedCharacter)"
         self.accent = nil

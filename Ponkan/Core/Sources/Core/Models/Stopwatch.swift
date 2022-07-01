@@ -10,7 +10,7 @@ public struct Stopwatch {
     }
     
     public var seconds: Double? {
-        guard let timeStart, let timeEnd else { return nil }
+        guard let timeStart = timeStart, let timeEnd = timeEnd else { return nil }
         return timeStart.distance(to: timeEnd)
     }
     

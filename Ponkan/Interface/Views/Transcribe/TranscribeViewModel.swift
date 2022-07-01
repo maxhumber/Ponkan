@@ -66,7 +66,7 @@ import Core
     }
     
     var stringScore: String {
-        guard let score else { return "?" }
+        guard let score = score else { return "?" }
         return percentFormatter.string(from: NSNumber(value: score)) ?? "?"
     }
     
@@ -86,7 +86,7 @@ import Core
             do {
                 try await service.start()
                 for try await transcription in service.transcribe() {
-                    if let transcription {
+                    if let transcription = transcription {
                         self.fragments = fragmentize(transcription)
                     }
                 }

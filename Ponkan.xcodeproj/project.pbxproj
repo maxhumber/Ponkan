@@ -3,24 +3,25 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		501A074E286B5C8C00733BED /* TranscribeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501A074D286B5C8C00733BED /* TranscribeViewModel.swift */; };
-		501A0756286B746700733BED /* Sugar in Frameworks */ = {isa = PBXBuildFile; productRef = 501A0755286B746700733BED /* Sugar */; };
 		501A2027286C9DFF00EE1182 /* CorrectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501A2026286C9DFF00EE1182 /* CorrectionView.swift */; };
+		50E4D437286F40BC00816978 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 50E4D436286F40BC00816978 /* Core */; };
+		50E4D439286F40BF00816978 /* Sugar in Frameworks */ = {isa = PBXBuildFile; productRef = 50E4D438286F40BF00816978 /* Sugar */; };
 		50EFB9F1286A0EFE006E3E06 /* PonkanApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EFB9F0286A0EFE006E3E06 /* PonkanApp.swift */; };
 		50EFB9F3286A0EFE006E3E06 /* TranscribeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EFB9F2286A0EFE006E3E06 /* TranscribeView.swift */; };
 		50EFB9F5286A0EFF006E3E06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50EFB9F4286A0EFF006E3E06 /* Assets.xcassets */; };
 		50EFB9F8286A0EFF006E3E06 /* Preview.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50EFB9F7286A0EFF006E3E06 /* Preview.xcassets */; };
-		50EFBA07286A2AF7006E3E06 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 50EFBA06286A2AF7006E3E06 /* Core */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		501A074D286B5C8C00733BED /* TranscribeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscribeViewModel.swift; sourceTree = "<group>"; };
 		501A0753286B740100733BED /* Sugar */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Sugar; sourceTree = "<group>"; };
 		501A2026286C9DFF00EE1182 /* CorrectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorrectionView.swift; sourceTree = "<group>"; };
+		50EE3C0E286F429D007BA920 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50EFB9ED286A0EFE006E3E06 /* Ponkan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ponkan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50EFB9F0286A0EFE006E3E06 /* PonkanApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PonkanApp.swift; sourceTree = "<group>"; };
 		50EFB9F2286A0EFE006E3E06 /* TranscribeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscribeView.swift; sourceTree = "<group>"; };
@@ -34,8 +35,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				50EFBA07286A2AF7006E3E06 /* Core in Frameworks */,
-				501A0756286B746700733BED /* Sugar in Frameworks */,
+				50E4D437286F40BC00816978 /* Core in Frameworks */,
+				50E4D439286F40BF00816978 /* Sugar in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,6 +101,7 @@
 			children = (
 				50EFB9F0286A0EFE006E3E06 /* PonkanApp.swift */,
 				50EFB9F4286A0EFF006E3E06 /* Assets.xcassets */,
+				50EE3C0E286F429D007BA920 /* Info.plist */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -154,8 +156,8 @@
 			);
 			name = Ponkan;
 			packageProductDependencies = (
-				50EFBA06286A2AF7006E3E06 /* Core */,
-				501A0755286B746700733BED /* Sugar */,
+				50E4D436286F40BC00816978 /* Core */,
+				50E4D438286F40BF00816978 /* Sugar */,
 			);
 			productName = Speak2Pinyin;
 			productReference = 50EFB9ED286A0EFE006E3E06 /* Ponkan.app */;
@@ -177,7 +179,7 @@
 				};
 			};
 			buildConfigurationList = 50EFB9E8286A0EFE006E3E06 /* Build configuration list for PBXProject "Ponkan" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -343,11 +345,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Ponkan/Interface/Preview\"";
 				DEVELOPMENT_TEAM = 65UTX76JJY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Ponkan/App/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To listen to your pronounciation.";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "To decipher your words and show them on screen within the app.";
@@ -378,11 +381,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Ponkan/Interface/Preview\"";
 				DEVELOPMENT_TEAM = 65UTX76JJY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Ponkan/App/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To listen to your pronounciation.";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "To decipher your words and show them on screen within the app.";
@@ -431,13 +435,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		501A0755286B746700733BED /* Sugar */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Sugar;
-		};
-		50EFBA06286A2AF7006E3E06 /* Core */ = {
+		50E4D436286F40BC00816978 /* Core */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Core;
+		};
+		50E4D438286F40BF00816978 /* Sugar */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Sugar;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
