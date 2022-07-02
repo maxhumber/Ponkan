@@ -15,7 +15,7 @@ I use Ponkan to practise my Mandarin in the same way that I use [MonkeyType](htt
 
 ### Download 
 
-[![BreadBuddy Download Link](https://raw.githubusercontent.com/maxhumber/BreadBuddy/master/Marketing/Logos/AppStore.svg)](https://apps.apple.com/app/id1620912870)
+[![BreadBuddy Download Link](https://raw.githubusercontent.com/maxhumber/BreadBuddy/master/Marketing/Logos/AppStore.svg)](https://apps.apple.com/app/id1632470402)
 
 
 
