@@ -1,5 +1,6 @@
 // Contrast with: https://developer.apple.com/tutorials/app-dev-training/transcribing-speech-to-text
 
+import Combine
 import Foundation
 import Speech
 
@@ -51,7 +52,10 @@ public final class TranscriptionService {
     /// ```
     public func transcribe() -> AsyncThrowingStream<String?, Error> {
         AsyncThrowingStream { continuation in
-            recognizer.recognitionTask(with: request) { result, error in
+            var task: SFSpeechRecognitionTask?
+            let onTermination = { task?.cancel() }
+            continuation.onTermination = { @Sendable _ in onTermination() }
+            task = recognizer.recognitionTask(with: request) { result, error in
                 if error != nil { continuation.finish(throwing: error) }
                 if result?.isFinal == true { continuation.finish() }
                 continuation.yield(result?.bestTranscription.formattedString)

@@ -5,7 +5,7 @@ import Core
 struct PonkanApp: App {
     var body: some Scene {
         WindowGroup {
-            TranscribeView()
+            NewTranscribeView()
         }
     }
 }
