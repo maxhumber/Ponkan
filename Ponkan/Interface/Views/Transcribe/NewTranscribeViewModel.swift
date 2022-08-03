@@ -21,6 +21,8 @@ import Speech
     }
     
     private func start() {
+        if !current.isEmpty { history.append(current) }
+        current = ""
         listening = true
         task = Task(priority: .userInitiated) {
             do {
@@ -42,10 +44,6 @@ import Speech
         service.stop()
         task?.cancel()
         task = nil
-        if !current.isEmpty {
-            history.append(current)
-        }
-        current = ""
     }
     
     func clear() {

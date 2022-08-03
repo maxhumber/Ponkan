@@ -4,6 +4,7 @@ struct NewTranscribeView: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     @StateObject private var viewModel: NewTranscribeViewModel
     @State private var fontSize: Double = 25
+    @State private var sliderIsDisplayed = false
     
     init(_ text: String = "", active: Bool = false) {
         self._viewModel = StateObject(wrappedValue: .init(text, active: active))
@@ -12,12 +13,11 @@ struct NewTranscribeView: View {
     var body: some View {
         VStack(spacing: 10) {
             Image(systemName: "circle.fill")
-                .foregroundColor(.red)
-                .opacity(viewModel.listening ? 1 : 0)
+                .opacity(0)
             ScrollViewReader { reader in
                 ScrollView(showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 20) {
-                        ForEach(viewModel.history, id: \.self) { text in
+                        ForEach($viewModel.history, id: \.self) { $text in
                             Text(text)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .foregroundColor(.secondary)
@@ -25,6 +25,9 @@ struct NewTranscribeView: View {
                         Text(viewModel.current)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .id("LAST")
+                        Text(viewModel.current)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .opacity(0)
                     }
                     .font(.system(size: fontSize))
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -34,28 +37,64 @@ struct NewTranscribeView: View {
                     reader.scrollTo("LAST")
                 }
             }
-            VStack {
+            VStack(spacing: 10) {
                 HStack {
-                    Text("10")
+                    Image(systemName: "textformat.size.smaller")
+                        .font(.title2)
                     Slider(value: $fontSize, in: 20...40)
-                    Text("30")
+                    Image(systemName: "textformat.size.larger")
+                        .font(.title2)
                 }
-                .padding()
-                HStack(spacing: 20) {
-                    Button {
-                        viewModel.toggle()
-                    } label: {
-                        Text("Start/Stop")
-                    }
+                .padding(.horizontal)
+                .opacity(sliderIsDisplayed ? 1 : 0)
+                HStack(spacing: 0) {
                     Button {
                         viewModel.clear()
                     } label: {
-                        Text("Clear")
+                        Image(systemName: "clear")
+                            .font(.title3)
                     }
-                    .foregroundColor(.red)
+                    .frame(maxWidth: .infinity)
+                    Button {
+                        viewModel.toggle()
+                    } label: {
+                        ZStack {
+                            Image(systemName: "mic")
+                                .opacity(0)
+                            Image(systemName: viewModel.listening == false ? "mic" : "pause")
+                        }
+                        .font(.title2)
+                        .foregroundColor(.white)
+                        .padding(10)
+                        .background(
+                            Circle()
+                                .fill(viewModel.listening == false ? .orange : .red)
+                        )
+                    }
+                    .frame(maxWidth: .infinity)
+                    Button {
+                        sliderIsDisplayed.toggle()
+                    } label: {
+                        Image(systemName: "textformat.size")
+                            .font(.title3)
+                            .frame(maxWidth: .infinity)
+                    }
                 }
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(Color.white)
+                        .shadow(color: .black.opacity(0.05), radius: 10, x: 0, y: 0)
+                )
             }
+            .padding()
         }
+        .background(
+            Color.secondary
+                .opacity(0.05)
+                .edgesIgnoringSafeArea(.all)
+        )
     }
 }
 
