@@ -3,11 +3,10 @@ import SwiftUI
 struct NewTranscribeView: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     @StateObject private var viewModel: NewTranscribeViewModel
-    @State private var fontSize: Double = 25
     @State private var sliderIsDisplayed = false
     
-    init(_ text: String = "", active: Bool = false) {
-        self._viewModel = StateObject(wrappedValue: .init(text, active: active))
+    init(_ text: String = "", listening: Bool = false) {
+        self._viewModel = StateObject(wrappedValue: .init(text, listening: listening))
     }
     
     var body: some View {
@@ -18,14 +17,21 @@ struct NewTranscribeView: View {
                 ScrollView(showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 20) {
                         ForEach($viewModel.history, id: \.self) { $text in
-                            Text(text)
+                            Text(text.pinyin())
                                 .frame(maxWidth: .infinity, alignment: .leading)
+//                                .contextMenu {
+//                                    Button {
+//                                        <#code#>
+//                                    } label: {
+//                                        <#code#>
+//                                    }
+//                                }
                         }
-                        Text(viewModel.current)
+                        Text(viewModel.current.pinyin())
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .id("LAST")
                         Image(systemName: "arrow.turn.down.left")
-                            .font(.system(size: fontSize-2))
+                            .font(.system(size: viewModel.fontSize-2))
                             .foregroundColor(.blue)
                             .onTapGesture { viewModel.newline() }
                             .opacity(viewModel.newlineIsDisplayed ? 1 : 0)
@@ -33,7 +39,7 @@ struct NewTranscribeView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .opacity(0)
                     }
-                    .font(.system(size: fontSize))
+                    .font(.system(size: viewModel.fontSize))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal)
                 }
@@ -45,7 +51,7 @@ struct NewTranscribeView: View {
                 HStack {
                     Image(systemName: "textformat.size.smaller")
                         .font(.title2)
-                    Slider(value: $fontSize, in: 20...40)
+                    Slider(value: $viewModel.fontSize, in: 20...40)
                     Image(systemName: "textformat.size.larger")
                         .font(.title2)
                 }
@@ -79,7 +85,7 @@ struct NewTranscribeView: View {
                     Button {
                         sliderIsDisplayed.toggle()
                     } label: {
-                        Image(systemName: "textformat.size")
+                        Image(systemName: "gearshape")
                             .font(.title3)
                             .frame(maxWidth: .infinity)
                     }

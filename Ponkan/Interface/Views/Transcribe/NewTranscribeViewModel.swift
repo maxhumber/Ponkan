@@ -2,18 +2,24 @@ import AVFoundation
 import Core
 import Foundation
 import Speech
+import SwiftUI
 
 @MainActor final class NewTranscribeViewModel: ObservableObject {
-    @Published var history = [String]()
-    @Published var current = ""
     @Published var listening = false
+    @Published var current = ""
+    @Published var history = [String]()
+    @AppStorage("FONT_SIZE") var fontSize: Double = 25
     
     private let service = TranscriptionService(.mandarin)
     private var task: Task<Void, Never>?
     
-    init(_ text: String = "", active: Bool = false) {
+    init(_ text: String = "", listening: Bool = false) {
         self.current = text
-        self.listening = active
+        self.listening = listening
+    }
+    
+    var newlineIsDisplayed: Bool {
+        listening && !current.isEmpty
     }
     
     func toggle() {
@@ -25,10 +31,11 @@ import Speech
         start()
     }
     
-    var newlineIsDisplayed: Bool {
-        listening && !current.isEmpty
+    func clear() {
+        history = []
+        current = ""
     }
-    
+        
     private func start() {
         if !current.isEmpty { history.append(current) }
         current = ""
@@ -38,7 +45,7 @@ import Speech
                 try await service.start()
                 for try await text in service.transcribe() {
                     if let text = text {
-                        self.current = text.pinyin()
+                        self.current = text
                     }
                 }
             } catch {
@@ -53,10 +60,5 @@ import Speech
         service.stop()
         task?.cancel()
         task = nil
-    }
-    
-    func clear() {
-        history = []
-        current = ""
     }
 }
