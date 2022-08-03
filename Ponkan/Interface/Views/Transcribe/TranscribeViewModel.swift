@@ -5,10 +5,12 @@ import Speech
 import SwiftUI
 
 @MainActor final class TranscribeViewModel: ObservableObject {
+    @AppStorage("PINYIN") var pinyin = true
+    @AppStorage("FONT_SIZE") var fontSize: Double = 25
+    @Published var settingsIsDisplayed = false
     @Published var listening = false
     @Published var current = ""
     @Published var history = [String]()
-    @AppStorage("FONT_SIZE") var fontSize: Double = 25
     
     private let service = TranscriptionService(.mandarin)
     private var task: Task<Void, Never>?

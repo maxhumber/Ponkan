@@ -3,7 +3,6 @@ import SwiftUI
 struct TranscribeView: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     @StateObject private var viewModel: TranscribeViewModel
-    @State private var sliderIsDisplayed = false
     
     init(_ text: String = "", listening: Bool = false) {
         self._viewModel = StateObject(wrappedValue: .init(text, listening: listening))
@@ -17,20 +16,19 @@ struct TranscribeView: View {
                 ScrollView(showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 20) {
                         ForEach($viewModel.history, id: \.self) { $text in
-                            Text(text.pinyin())
+                            Text(viewModel.pinyin ? text.pinyin() : text)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                         }
-                        Text(viewModel.current.pinyin())
+                        Text(viewModel.pinyin ? viewModel.current.pinyin() : viewModel.current)
                             .frame(maxWidth: .infinity, alignment: .leading)
-                            .id("LAST")
                         Image(systemName: "arrow.turn.down.left")
                             .font(.system(size: viewModel.fontSize-2))
                             .foregroundColor(.blue)
                             .onTapGesture { viewModel.newline() }
                             .opacity(viewModel.newlineIsDisplayed ? 1 : 0)
-                        Text(viewModel.current)
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                        Image(systemName: "circle")
                             .opacity(0)
+                            .id("LAST")
                     }
                     .font(.system(size: viewModel.fontSize))
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -40,17 +38,34 @@ struct TranscribeView: View {
                     reader.scrollTo("LAST")
                 }
             }
-            VStack(spacing: 10) {
-                HStack {
-                    Image(systemName: "textformat.size.smaller")
-                        .font(.title2)
-                    Slider(value: $viewModel.fontSize, in: 20...40)
-                        .tint(.primary)
-                    Image(systemName: "textformat.size.larger")
-                        .font(.title2)
+            VStack(spacing: 15) {
+                HStack(spacing: 15) {
+                    HStack {
+                        Image(systemName: "textformat.size.smaller")
+                            .font(.title2)
+                        Slider(value: $viewModel.fontSize, in: 20...40)
+                            .tint(.primary)
+                        Image(systemName: "textformat.size.larger")
+                            .font(.title2)
+                    }
+                    Button {
+                        viewModel.pinyin.toggle()
+                    } label: {
+                        ZStack {
+                            Text("拼音")
+                                .opacity(0)
+                            Text(viewModel.pinyin ? "中文" : "拼音")
+                        }
+                        .padding(5)
+                        .background(
+                            RoundedRectangle(cornerRadius: 4)
+                                .stroke(.primary)
+                        )
+                        .foregroundColor(.primary)
+                        .font(.caption)
+                    }
                 }
-                .padding(.horizontal)
-                .opacity(sliderIsDisplayed ? 1 : 0)
+                .opacity(viewModel.settingsIsDisplayed ? 1 : 0)
                 HStack(spacing: 0) {
                     Button {
                         viewModel.clear()
@@ -74,7 +89,7 @@ struct TranscribeView: View {
                     }
                     .frame(maxWidth: .infinity)
                     Button {
-                        sliderIsDisplayed.toggle()
+                        viewModel.settingsIsDisplayed.toggle()
                     } label: {
                         Image(systemName: "gearshape")
                             .frame(maxWidth: .infinity)
@@ -85,9 +100,16 @@ struct TranscribeView: View {
                 .frame(maxWidth: .infinity)
                 .padding()
                 .background(
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(Color.white)
-                        .shadow(color: .black.opacity(0.05), radius: 10, x: 0, y: 0)
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(.primary)
+                            .colorInvert()
+                            .shadow(color: .black.opacity(0.05), radius: 10, x: 0, y: 0)
+                        if colorScheme == .dark {
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(.primary)
+                        }
+                    }
                 )
                 .foregroundColor(.primary)
                 .font(.title3)

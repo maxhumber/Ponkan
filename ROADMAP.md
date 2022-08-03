@@ -1,20 +1,17 @@
 ### Roadmap
 
-- New line
-- Delete a line
-- Settings View
-  - Adjust Text Size
-  - Change to OG text
-  - Donations
-- Advertising
+- New-lining Function
+- "Delete a line"
+- Donation Service
+- Ad Service
+- Onboarding + Changelog Screens
 
 ---
 
-- Subscription versus consumable
-- Dark/Light/System Mode
-- Pinyin vs character
+- In-line corrections
+- Rating Service
+- Changeable Dark/Light/System Mode
 
-- Onboarding + Changelog Screens
 - iPad support
 - Recording + Playback
-- ~Additional Language Support~
+- Consumables v. Subscriptions
