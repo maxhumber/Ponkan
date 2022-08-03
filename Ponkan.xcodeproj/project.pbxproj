@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		501A074E286B5C8C00733BED /* TranscribeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501A074D286B5C8C00733BED /* TranscribeViewModel.swift */; };
-		501A2027286C9DFF00EE1182 /* CorrectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501A2026286C9DFF00EE1182 /* CorrectionView.swift */; };
 		50AE81FB2899A6660010B55F /* NewTranscribeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AE81FA2899A6660010B55F /* NewTranscribeView.swift */; };
 		50AE81FD2899A6940010B55F /* NewTranscribeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AE81FC2899A6940010B55F /* NewTranscribeViewModel.swift */; };
 		50E4D437286F40BC00816978 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 50E4D436286F40BC00816978 /* Core */; };
@@ -22,7 +21,6 @@
 /* Begin PBXFileReference section */
 		501A074D286B5C8C00733BED /* TranscribeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscribeViewModel.swift; sourceTree = "<group>"; };
 		501A0753286B740100733BED /* Sugar */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Sugar; sourceTree = "<group>"; };
-		501A2026286C9DFF00EE1182 /* CorrectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorrectionView.swift; sourceTree = "<group>"; };
 		50AE81FA2899A6660010B55F /* NewTranscribeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTranscribeView.swift; sourceTree = "<group>"; };
 		50AE81FC2899A6940010B55F /* NewTranscribeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTranscribeViewModel.swift; sourceTree = "<group>"; };
 		50EE3C0E286F429D007BA920 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -56,14 +54,6 @@
 				501A074D286B5C8C00733BED /* TranscribeViewModel.swift */,
 			);
 			path = Transcribe;
-			sourceTree = "<group>";
-		};
-		501A2025286C9DF500EE1182 /* Correction */ = {
-			isa = PBXGroup;
-			children = (
-				501A2026286C9DFF00EE1182 /* CorrectionView.swift */,
-			);
-			path = Correction;
 			sourceTree = "<group>";
 		};
 		50EFB9E4286A0EFE006E3E06 = {
@@ -133,7 +123,6 @@
 			isa = PBXGroup;
 			children = (
 				501A074C286B524A00733BED /* Transcribe */,
-				501A2025286C9DF500EE1182 /* Correction */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -225,7 +214,6 @@
 				50AE81FD2899A6940010B55F /* NewTranscribeViewModel.swift in Sources */,
 				50AE81FB2899A6660010B55F /* NewTranscribeView.swift in Sources */,
 				501A074E286B5C8C00733BED /* TranscribeViewModel.swift in Sources */,
-				501A2027286C9DFF00EE1182 /* CorrectionView.swift in Sources */,
 				50EFB9F1286A0EFE006E3E06 /* PonkanApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
