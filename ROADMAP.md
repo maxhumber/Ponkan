@@ -4,8 +4,9 @@
 - Delete a line
 - Settings View
   - Adjust Text Size
-  - Show OG
+  - Change to OG text
   - Donations
+- Advertising
 
 ---
 
