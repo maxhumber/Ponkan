@@ -1,4 +1,5 @@
 import SwiftUI
+import Sugar
 
 struct TranscribeView: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
@@ -9,16 +10,17 @@ struct TranscribeView: View {
     }
     
     var body: some View {
-        VStack(spacing: 10) {
-            spanner
+        VStack(spacing: 5) {
+            header
             content
             controls
         }
         .background(contentBackground)
+        .errorAlert(error: $viewModel.error)
     }
     
-    private var spanner: some View {
-        Image(systemName: "circle.fill")
+    private var header: some View {
+        Image(systemName: "circle")
             .opacity(0)
     }
     
@@ -35,7 +37,7 @@ struct TranscribeView: View {
                 .padding(.horizontal)
             }
             .onChange(of: viewModel.current) { _ in
-                reader.scrollTo("LAST")
+                reader.scrollTo(viewModel.scrollmark)
             }
         }
     }
@@ -50,7 +52,7 @@ struct TranscribeView: View {
     private var scrollmark: some View {
         Image(systemName: "circle")
             .opacity(0)
-            .id("LAST")
+            .id(viewModel.scrollmark)
     }
     
     @ViewBuilder private var currentText: some View {
@@ -58,7 +60,7 @@ struct TranscribeView: View {
             Group {
                 Text(viewModel.pinyin ? viewModel.current.pinyin() : viewModel.current) +
                 Text("\(Image(systemName: "arrow.turn.down.left"))")
-                    .font(.system(size: viewModel.fontSize*0.60))
+                    .font(.system(size: viewModel.fontSize*0.65))
                     .foregroundColor(.secondary)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -91,7 +93,9 @@ struct TranscribeView: View {
             HStack(spacing: 15) {
                 fontSlider
                 pinyinToggler
+                tipButton
             }
+            .padding(.horizontal, 5)
         }
     }
     
@@ -118,10 +122,21 @@ struct TranscribeView: View {
             .padding(5)
             .background(
                 RoundedRectangle(cornerRadius: 4)
-                    .stroke(.primary)
+                    .stroke(lineWidth: 1.5)
+                    .foregroundColor(.primary)
             )
             .foregroundColor(.primary)
             .font(.caption)
+        }
+    }
+    
+    private var tipButton: some View {
+        Button {
+            print("Tip")
+        } label: {
+            Image(systemName: "app.gift")
+                .foregroundColor(.pink)
+                .font(.title.weight(.light))
         }
     }
     

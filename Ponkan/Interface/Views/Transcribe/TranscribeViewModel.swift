@@ -21,6 +21,10 @@ import SwiftUI
         self.listening = listening
     }
     
+    var scrollmark: String {
+        "SCROLLMARK"
+    }
+    
     var newlineIsDisplayed: Bool {
         listening && !current.isEmpty
     }
@@ -30,8 +34,7 @@ import SwiftUI
     }
     
     func newline() {
-        stop()
-        start()
+        stop(); start()
     }
     
     func clear() {
@@ -40,9 +43,9 @@ import SwiftUI
     }
         
     private func start() {
-        if !current.isEmpty { history.append(current) }
-        current = ""
         listening = true
+        settingsIsDisplayed = false
+        log()
         task = Task(priority: .userInitiated) {
             do {
                 try await service.start()
@@ -55,6 +58,13 @@ import SwiftUI
                 self.error = error
                 stop()
             }
+        }
+    }
+    
+    private func log() {
+        if !current.isEmpty {
+            history.append(current)
+            current = ""
         }
     }
     
