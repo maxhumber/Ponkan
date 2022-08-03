@@ -1,6 +1,7 @@
 ### Roadmap
 
 - New-lining Function
+- Add in Errors
 - "Delete a line"
 - Donation Service
 - Ad Service
