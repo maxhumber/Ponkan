@@ -50,9 +50,7 @@ import SwiftUI
             do {
                 try await service.start()
                 for try await text in service.transcribe() {
-                    if let text = text {
-                        self.current = text
-                    }
+                    self.current = text
                 }
             } catch {
                 self.error = error
