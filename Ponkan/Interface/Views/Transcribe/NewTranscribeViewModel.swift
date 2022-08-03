@@ -29,7 +29,7 @@ import Speech
                 try await service.start()
                 for try await text in service.transcribe() {
                     if let text = text {
-                        self.current = text.atomize().map({ $0.pinyin() }).joined(separator: " ")
+                        self.current = text.pinyin()
                     }
                 }
             } catch {

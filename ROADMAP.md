@@ -1,13 +1,15 @@
 ### Roadmap
 
-- Pinyin vs character
-- Timestamps above recording
+- Delete a line
+- New line
 - Settings View
   - Adjust Text Size
   - Dark/Light/System Mode
-- Delete a line
+- 
 
 ---
+
+- Pinyin vs character
 
 - Audio Playback
 - Account View

@@ -18,7 +18,7 @@ public struct Fragment: Identifiable, Codable, Equatable {
     }
     
     public var pinyin: String {
-        heard.pinyin()
+        heard//.pinyin()
     }
     
     public var isChinese: Bool {

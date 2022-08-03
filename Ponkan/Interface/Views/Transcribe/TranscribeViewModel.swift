@@ -20,7 +20,7 @@ import Core
     }
     
     private func fragmentize(_ text: String) -> [Fragment] {
-        let atoms = text.atomize().filter({ !$0.isWhitespace })
+        let atoms = text.atoms.filter({ !$0.isWhitespace })
         var fragments = [Fragment]()
         for (a, b) in zip(atoms, atoms.dropFirst(1)) {
             let fragment = Fragment(a, precedesPunctuation: b.isPunctuation)
