@@ -20,6 +20,15 @@ import Speech
         listening ? stop() : start()
     }
     
+    func newline() {
+        stop()
+        start()
+    }
+    
+    var newlineIsDisplayed: Bool {
+        listening && !current.isEmpty
+    }
+    
     private func start() {
         if !current.isEmpty { history.append(current) }
         current = ""

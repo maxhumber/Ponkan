@@ -20,11 +20,15 @@ struct NewTranscribeView: View {
                         ForEach($viewModel.history, id: \.self) { $text in
                             Text(text)
                                 .frame(maxWidth: .infinity, alignment: .leading)
-                                .foregroundColor(.secondary)
                         }
                         Text(viewModel.current)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .id("LAST")
+                        Image(systemName: "arrow.turn.down.left")
+                            .font(.system(size: fontSize-2))
+                            .foregroundColor(.blue)
+                            .onTapGesture { viewModel.newline() }
+                            .opacity(viewModel.newlineIsDisplayed ? 1 : 0)
                         Text(viewModel.current)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .opacity(0)
