@@ -26,20 +26,9 @@ struct TranscribeView: View {
         ScrollViewReader { reader in
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 20) {
-                    ForEach($viewModel.history, id: \.self) { $text in
-                        Text(viewModel.pinyin ? text.pinyin() : text)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                    }
-                    Text(viewModel.pinyin ? viewModel.current.pinyin() : viewModel.current)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    Image(systemName: "arrow.turn.down.left")
-                        .font(.system(size: viewModel.fontSize-2))
-                        .foregroundColor(.blue)
-                        .onTapGesture { viewModel.newline() }
-                        .opacity(viewModel.newlineIsDisplayed ? 1 : 0)
-                    Image(systemName: "circle")
-                        .opacity(0)
-                        .id("LAST")
+                    historyText
+                    currentText
+                    scrollmark
                 }
                 .font(.system(size: viewModel.fontSize))
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -48,6 +37,35 @@ struct TranscribeView: View {
             .onChange(of: viewModel.current) { _ in
                 reader.scrollTo("LAST")
             }
+        }
+    }
+    
+    private var historyText: some View {
+        ForEach($viewModel.history, id: \.self) { $text in
+            Text(viewModel.pinyin ? text.pinyin() : text)
+                .frame(maxWidth: .infinity, alignment: .leading)
+        }
+    }
+    
+    private var scrollmark: some View {
+        Image(systemName: "circle")
+            .opacity(0)
+            .id("LAST")
+    }
+    
+    @ViewBuilder private var currentText: some View {
+        if viewModel.newlineIsDisplayed {
+            Group {
+                Text(viewModel.pinyin ? viewModel.current.pinyin() : viewModel.current) +
+                Text("\(Image(systemName: "arrow.turn.down.left"))")
+                    .font(.system(size: viewModel.fontSize*0.60))
+                    .foregroundColor(.secondary)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .onTapGesture { viewModel.newline() }
+        } else {
+            Text(viewModel.pinyin ? viewModel.current.pinyin() : viewModel.current)
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
     
@@ -68,12 +86,13 @@ struct TranscribeView: View {
         .padding()
     }
     
-    private var popUpSettings: some View {
-        HStack(spacing: 15) {
-            fontSlider
-            pinyinToggler
+    @ViewBuilder private var popUpSettings: some View {
+        if viewModel.settingsIsDisplayed {
+            HStack(spacing: 15) {
+                fontSlider
+                pinyinToggler
+            }
         }
-        .opacity(viewModel.settingsIsDisplayed ? 1 : 0)
     }
     
     private var fontSlider: some View {

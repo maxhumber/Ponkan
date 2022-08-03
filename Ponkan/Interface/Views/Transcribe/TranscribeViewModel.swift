@@ -11,6 +11,7 @@ import SwiftUI
     @Published var listening = false
     @Published var current = ""
     @Published var history = [String]()
+    @Published var error: Error? = nil
     
     private let service = TranscriptionService(.mandarin)
     private var task: Task<Void, Never>?
@@ -51,7 +52,7 @@ import SwiftUI
                     }
                 }
             } catch {
-                print(error)
+                self.error = error
                 stop()
             }
         }
