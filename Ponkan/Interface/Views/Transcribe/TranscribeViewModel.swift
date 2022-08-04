@@ -25,7 +25,11 @@ import SwiftUI
         "SCROLLMARK"
     }
     
-    var newlineIsDisplayed: Bool {
+    var passivelyListening: Bool {
+        listening && current.isEmpty
+    }
+    
+    var activelyListening: Bool {
         listening && !current.isEmpty
     }
     

@@ -55,20 +55,28 @@ struct TranscribeView: View {
             .id(viewModel.scrollmark)
     }
     
-    @ViewBuilder private var currentText: some View {
-        if viewModel.newlineIsDisplayed {
-            Group {
-                Text(viewModel.pinyin ? viewModel.current.pinyin() : viewModel.current) +
-                Text("\(Image(systemName: "arrow.turn.down.left"))")
-                    .font(.system(size: viewModel.fontSize*0.65))
+    private var currentText: some View {
+        Group {
+            if viewModel.activelyListening {
+                activeCurrentText
+            } else if viewModel.passivelyListening {
+                Text("...")
                     .foregroundColor(.secondary)
+            } else {
+                Text(viewModel.pinyin ? viewModel.current.pinyin() : viewModel.current)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .onTapGesture { viewModel.newline() }
-        } else {
-            Text(viewModel.pinyin ? viewModel.current.pinyin() : viewModel.current)
-                .frame(maxWidth: .infinity, alignment: .leading)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+    
+    private var activeCurrentText: some View {
+        Group {
+            Text(viewModel.pinyin ? viewModel.current.pinyin() : viewModel.current) +
+            Text(" \(Image(systemName: "arrow.turn.down.left"))")
+                .font(.system(size: viewModel.fontSize*0.65))
+                .foregroundColor(.pink)
+        }
+        .onTapGesture { viewModel.newline() }
     }
     
     private var controls: some View {
