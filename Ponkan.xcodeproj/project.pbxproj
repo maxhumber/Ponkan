@@ -7,24 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		501A074E286B5C8C00733BED /* TranscribeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501A074D286B5C8C00733BED /* TranscribeViewModel.swift */; };
-		501A2027286C9DFF00EE1182 /* CorrectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501A2026286C9DFF00EE1182 /* CorrectionView.swift */; };
+		50AE81FB2899A6660010B55F /* TranscribeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AE81FA2899A6660010B55F /* TranscribeView.swift */; };
+		50AE81FD2899A6940010B55F /* TranscribeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AE81FC2899A6940010B55F /* TranscribeViewModel.swift */; };
 		50E4D437286F40BC00816978 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 50E4D436286F40BC00816978 /* Core */; };
 		50E4D439286F40BF00816978 /* Sugar in Frameworks */ = {isa = PBXBuildFile; productRef = 50E4D438286F40BF00816978 /* Sugar */; };
 		50EFB9F1286A0EFE006E3E06 /* PonkanApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EFB9F0286A0EFE006E3E06 /* PonkanApp.swift */; };
-		50EFB9F3286A0EFE006E3E06 /* TranscribeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EFB9F2286A0EFE006E3E06 /* TranscribeView.swift */; };
 		50EFB9F5286A0EFF006E3E06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50EFB9F4286A0EFF006E3E06 /* Assets.xcassets */; };
 		50EFB9F8286A0EFF006E3E06 /* Preview.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50EFB9F7286A0EFF006E3E06 /* Preview.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		501A074D286B5C8C00733BED /* TranscribeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscribeViewModel.swift; sourceTree = "<group>"; };
 		501A0753286B740100733BED /* Sugar */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Sugar; sourceTree = "<group>"; };
-		501A2026286C9DFF00EE1182 /* CorrectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorrectionView.swift; sourceTree = "<group>"; };
+		50AE81FA2899A6660010B55F /* TranscribeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscribeView.swift; sourceTree = "<group>"; };
+		50AE81FC2899A6940010B55F /* TranscribeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscribeViewModel.swift; sourceTree = "<group>"; };
 		50EE3C0E286F429D007BA920 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50EFB9ED286A0EFE006E3E06 /* Ponkan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ponkan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50EFB9F0286A0EFE006E3E06 /* PonkanApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PonkanApp.swift; sourceTree = "<group>"; };
-		50EFB9F2286A0EFE006E3E06 /* TranscribeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscribeView.swift; sourceTree = "<group>"; };
 		50EFB9F4286A0EFF006E3E06 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		50EFB9F7286A0EFF006E3E06 /* Preview.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Preview.xcassets; sourceTree = "<group>"; };
 		50EFB9FE286A0F56006E3E06 /* Core */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Core; sourceTree = "<group>"; };
@@ -46,18 +44,10 @@
 		501A074C286B524A00733BED /* Transcribe */ = {
 			isa = PBXGroup;
 			children = (
-				50EFB9F2286A0EFE006E3E06 /* TranscribeView.swift */,
-				501A074D286B5C8C00733BED /* TranscribeViewModel.swift */,
+				50AE81FA2899A6660010B55F /* TranscribeView.swift */,
+				50AE81FC2899A6940010B55F /* TranscribeViewModel.swift */,
 			);
 			path = Transcribe;
-			sourceTree = "<group>";
-		};
-		501A2025286C9DF500EE1182 /* Correction */ = {
-			isa = PBXGroup;
-			children = (
-				501A2026286C9DFF00EE1182 /* CorrectionView.swift */,
-			);
-			path = Correction;
 			sourceTree = "<group>";
 		};
 		50EFB9E4286A0EFE006E3E06 = {
@@ -127,7 +117,6 @@
 			isa = PBXGroup;
 			children = (
 				501A074C286B524A00733BED /* Transcribe */,
-				501A2025286C9DF500EE1182 /* Correction */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -215,9 +204,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				50EFB9F3286A0EFE006E3E06 /* TranscribeView.swift in Sources */,
-				501A074E286B5C8C00733BED /* TranscribeViewModel.swift in Sources */,
-				501A2027286C9DFF00EE1182 /* CorrectionView.swift in Sources */,
+				50AE81FD2899A6940010B55F /* TranscribeViewModel.swift in Sources */,
+				50AE81FB2899A6660010B55F /* TranscribeView.swift in Sources */,
 				50EFB9F1286A0EFE006E3E06 /* PonkanApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

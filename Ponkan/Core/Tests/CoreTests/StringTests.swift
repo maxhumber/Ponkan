@@ -3,9 +3,8 @@ import XCTest
 
 final class StringTests: XCTestCase {
     func testChineseToPinyin() throws {
-        let input = "我爱你"
-        let output = "wǒ ài nǐ"
-        XCTAssertEqual(input.pinyin(), output)
+        let input = "我爱你，你也爱我吗？"
+        XCTAssertEqual(input.pinyin(), "wǒ ài nǐ, nǐ yě ài wǒ ma?")
     }
     
     func testEnglishThroughPinyin() throws {
@@ -14,18 +13,17 @@ final class StringTests: XCTestCase {
         XCTAssertEqual(input.pinyin(), output)
     }
     
+    func testIAmCanadian() {
+        let input = "我是加拿大人！"
+        XCTAssertEqual(input.pinyin(), "wǒ shì jiānádàrén!")
+    }
+    
     func testNumbersToPinyin() throws {
-        let input = "一二三四"
-        let output = "yī èr sān sì"
+        let input = "一. 二. 三. 四."
+        let output = "yī. èr. sān. sì."
         XCTAssertEqual(input.pinyin(), output)
     }
-    
-    func testAtomize() throws {
-        let input = "Hello, world! 我爱你。 你也爱我吗？ 123."
-        let output = ["Hello", ",", " ", "world", "!", " ", "我", "爱", "你", "。", " ", "你", "也", "爱", "我", "吗", "？", " ", "123", "."]
-        XCTAssertEqual(input.atomize(), output)
-    }
-    
+
     func testIsChinese() {
         XCTAssertTrue("我爱你".isChinese)
     }

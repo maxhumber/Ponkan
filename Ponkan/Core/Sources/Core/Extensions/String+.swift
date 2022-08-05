@@ -2,22 +2,28 @@ import Foundation
 
 extension String {
     public func pinyin() -> String {
+        let punctuation = ["，": ",", "。": ".", "？": "?", "！": "!"]
+        return atoms
+            .filter { !$0.isWhitespace }
+            .map { punctuation[$0] ?? $0.transformToLatin() }
+            .rejoined()
+    }
+    
+    public var atoms: [String] {
+        var words = [String]()
+        enumerateSubstrings(in: startIndex..., options: .byWords) { substring, range, enclosedRange, _ in
+            words.append(substring!)
+            words += self[range.upperBound..<enclosedRange.upperBound].map(String.init)
+        }
+        return words
+    }
+    
+    private func transformToLatin() -> String {
         if isEmpty { return "" }
         let cfString = CFStringCreateMutableCopy(nil, 0, self as CFString)
         CFStringTransform(cfString, nil, kCFStringTransformToLatin, false)
         let string = cfString! as String
         return string.filter { !$0.isWhitespace }
-    }
-    
-    public func atomize() -> [String] {
-        var words = [String]()
-        enumerateSubstrings(in: startIndex..., options: .byWords) { substring, range, enclosedRange, _ in
-            words.append(substring!)
-            words += self[range.upperBound..<enclosedRange.upperBound]
-                .split { $0.isWhitespace }
-                .map { String($0) }
-        }
-        return words
     }
     
     public var isWhitespace: Bool {

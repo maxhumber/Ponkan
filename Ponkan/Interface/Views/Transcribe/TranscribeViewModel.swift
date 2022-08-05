@@ -1,94 +1,71 @@
 import AVFoundation
+import Core
 import Foundation
 import Speech
-import Core
+import SwiftUI
 
 @MainActor final class TranscribeViewModel: ObservableObject {
-    @Published var selectedFragment: Fragment?
-    @Published var fragments = [Fragment]()
+    @AppStorage("PINYIN") var pinyin = true
+    @AppStorage("FONT_SIZE") var fontSize: Double = 25
+    @Published var settingsIsDisplayed = false
     @Published var listening = false
-    @Published var correcting = false
-    @Published var stopwatch = Stopwatch()
-    @Published var error: Error?
+    @Published var current = ""
+    @Published var history = [String]()
+    @Published var error: Error? = nil
     
     private let service = TranscriptionService(.mandarin)
     private var task: Task<Void, Never>?
     
-    init(_ text: String = "", active: Bool = false) {
-        self.fragments = fragmentize(text)
-        self.listening = active
+    init() {}
+    
+    init(text: String, listening: Bool, pinyin: Bool, settings: Bool) {
+        self.current = text
+        self.listening = listening
+        self.pinyin = pinyin
+        self.settingsIsDisplayed = settings
     }
     
-    private func fragmentize(_ text: String) -> [Fragment] {
-        let atoms = text.atomize().filter({ !$0.isWhitespace })
-        var fragments = [Fragment]()
-        for (a, b) in zip(atoms, atoms.dropFirst(1)) {
-            let fragment = Fragment(a, precedesPunctuation: b.isPunctuation)
-            fragments.append(fragment)
-        }
-        if let last = atoms.last {
-            fragments.append(Fragment(last))
-        }
-        return fragments
+    init(text: [String], listening: Bool, pinyin: Bool, settings: Bool) {
+        self.history = text
+        self.listening = listening
+        self.pinyin = pinyin
+        self.settingsIsDisplayed = settings
     }
     
-    private var validFragments: [Fragment] {
-        fragments.filter { $0.isChinese }
+    var scrollmark: String {
+        "SCROLLMARK"
     }
     
-    private var totalFragments: Int {
-        validFragments.count
+    var passivelyListening: Bool {
+        listening && current.isEmpty
     }
     
-    private var correctFragments: Int {
-        validFragments.filter { !$0.flagged }.count
-    }
-    
-    private var score: Double? {
-        if validFragments.isEmpty || totalFragments <= 0 { return nil }
-        return Double(correctFragments) / Double(totalFragments)
-    }
-    
-    var stringWords: String {
-        guard totalFragments > 0 else { return "?" }
-        return "\(totalFragments)"
-    }
-    
-    var stringSeconds: String {
-        guard let seconds = stopwatch.seconds else { return "?" }
-        return "\(String(format: "%0.f", seconds))s"
-    }
-    
-    var stringWordsPerMinute: String {
-        guard let seconds = stopwatch.seconds else { return "?" }
-        let value = Double(totalFragments) / seconds * 60
-        return String(format: "%0.f", value)
-    }
-    
-    var stringScore: String {
-        guard let score = score else { return "?" }
-        return percentFormatter.string(from: NSNumber(value: score)) ?? "?"
+    var activelyListening: Bool {
+        listening && !current.isEmpty
     }
     
     func toggle() {
         listening ? stop() : start()
     }
     
-    func clearFragments() {
-        fragments = []
+    func newline() {
+        stop(); start()
     }
     
+    func clear() {
+        history = []
+        current = ""
+    }
+        
     private func start() {
-        fragments = []
-        stopwatch.start()
         listening = true
+        settingsIsDisplayed = false
+        log()
         task = Task(priority: .userInitiated) {
             do {
                 try await service.start()
-                for try await transcription in service.transcribe() {
-                    if let transcription = transcription {
-                        self.fragments = fragmentize(transcription)
-                    }
+                for try await text in service.transcribe() {
+                    self.current = text
                 }
             } catch {
                 self.error = error
@@ -97,20 +74,17 @@ import Core
         }
     }
     
+    private func log() {
+        if !current.isEmpty {
+            history.append(current)
+            current = ""
+        }
+    }
+    
     private func stop() {
-        stopwatch.stop()
+        listening = false
         service.stop()
         task?.cancel()
         task = nil
-        listening = false
     }
-    
-    private let percentFormatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .percent
-        formatter.minimumIntegerDigits = 1
-        formatter.maximumIntegerDigits = 3
-        formatter.maximumFractionDigits = 1
-        return formatter
-    }()
 }

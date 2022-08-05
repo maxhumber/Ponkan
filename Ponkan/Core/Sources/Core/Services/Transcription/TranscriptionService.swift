@@ -1,5 +1,4 @@
-// Contrast with: https://developer.apple.com/tutorials/app-dev-training/transcribing-speech-to-text
-
+import Combine
 import Foundation
 import Speech
 
@@ -38,23 +37,25 @@ public final class TranscriptionService {
     }
     
     /// Transcribe audio stream
-    /// - Returns: An async throwing stream of (optional) strings
+    /// - Returns: An async throwing stream of strings
     ///
     /// Example:
     /// ```
     /// try await service.start()
-    /// for try await transcription in service.transcribe() {
-    ///    if let transcription {
-    ///        print(transcription)
-    ///    }
+    /// for try await text in service.transcribe() {
+    ///     print(text)
     /// }
     /// ```
-    public func transcribe() -> AsyncThrowingStream<String?, Error> {
+    public func transcribe() -> AsyncThrowingStream<String, Error> {
         AsyncThrowingStream { continuation in
-            recognizer.recognitionTask(with: request) { result, error in
+            var task: SFSpeechRecognitionTask?
+            let onTermination = { task?.cancel() }
+            continuation.onTermination = { @Sendable _ in onTermination() }
+            task = recognizer.recognitionTask(with: request) { result, error in
                 if error != nil { continuation.finish(throwing: error) }
                 if result?.isFinal == true { continuation.finish() }
-                continuation.yield(result?.bestTranscription.formattedString)
+                let string = result?.bestTranscription.formattedString ?? ""
+                continuation.yield(string)
             }
         }
     }

@@ -1,194 +1,223 @@
 import SwiftUI
-import Core
 import Sugar
 
 struct TranscribeView: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     @StateObject private var viewModel: TranscribeViewModel
     
-    init(_ text: String = "", active: Bool = false) {
-        self._viewModel = StateObject(wrappedValue: .init(text, active: active))
+    init() {
+        self._viewModel = StateObject(wrappedValue: .init())
+    }
+    
+    init(_ text: String, listening: Bool = false, pinyin: Bool = true, settings: Bool = false) {
+        self._viewModel = StateObject(wrappedValue: .init(text: text, listening: listening, pinyin: pinyin, settings: settings))
+    }
+    
+    init(_ text: [String], listening: Bool = false, pinyin: Bool = true, settings: Bool = false) {
+        self._viewModel = StateObject(wrappedValue: .init(text: text, listening: listening, pinyin: pinyin, settings: settings))
     }
     
     var body: some View {
-        VStack(spacing: 10) {
+        VStack(spacing: 5) {
             header
             content
-            footer
+            controls
         }
+        .background(contentBackground)
         .errorAlert(error: $viewModel.error)
     }
     
     private var header: some View {
-        ZStack {
-            HStack {
-                accountButton
-                Spacer()
-                junkButton
-            }
-            headerContent
-        }
-        .padding()
-    }
-    
-    private var accountButton: some View {
-        Button {
-            print("NOT CONNECTED")
-        } label: {
-            Image(systemName: "person")
-                .foregroundColor(.primary.opacity(0.2))
-        }
-        .disabled(true)
-        .opacity(0)
-    }
-    
-    private var strikeButton: some View {
-        Button {
-            print("NOT CONNECTED")
-        } label: {
-            Text("S") {
-                $0.foregroundColor = .primary
-                $0.strikethroughStyle = Text.LineStyle(pattern: .solid, color: .red)
-            }
-            .padding(.horizontal, 5)
-            .background(
-                RoundedRectangle(cornerRadius: 4)
-                    .foregroundColor(pinkishColor)
-            )
-        }
-        .opacity(0)
-    }
-    
-    private var junkButton: some View {
-        Button {
-            viewModel.clearFragments()
-        } label: {
-            Image(systemName: "xmark.bin")
-                .foregroundColor(.red.opacity(0.65))
-        }
-        .opacity(viewModel.fragments.isEmpty || viewModel.listening ? 0 : 1)
-    }
-    
-    @ViewBuilder private var headerContent: some View {
-        ZStack {
-            statistics
-                .opacity(0)
-            if viewModel.listening {
-                Image(systemName: "circle.fill")
-                    .foregroundColor(.red)
-            } else if viewModel.fragments.isEmpty {
-                Text("Chinese → Pinyin")
-                    .foregroundColor(.secondary)
-            } else {
-                statistics
-            }
-        }
-    }
-    
-    private var statistics: some View {
-        HStack {
-            statistic(viewModel.stringWords, label: "words")
-            statistic(viewModel.stringSeconds, label: "time")
-            statistic(viewModel.stringWordsPerMinute, label: "wpm")
-            statistic(viewModel.stringScore, label: "score")
-        }
-        .foregroundColor(.secondary)
-    }
-    
-    private func statistic(_ value: String, label: String) -> some View {
-        VStack(spacing: 2) {
-            ZStack {
-                Text("100%").opacity(0)
-                Text(value)
-            }
-            .font(.caption.monospacedDigit())
-            ZStack {
-                Text("score").opacity(0)
-                Text(label)
-            }
-            .font(.caption2)
-        }
+        Image(systemName: "circle")
+            .opacity(0)
     }
     
     private var content: some View {
         ScrollViewReader { reader in
             ScrollView(showsIndicators: false) {
-                flowGrid
-            }
-            .onChange(of: viewModel.fragments) { _ in
-                reader.scrollTo(viewModel.fragments.last?.id)
-            }
-        }
-    }
-    
-    @ViewBuilder var flowGrid: some View {
-        FlowGrid {
-            ForEach($viewModel.fragments) { $fragment in
-                Button {
-                    if viewModel.correcting {
-                        viewModel.selectedFragment = fragment
-                    } else {
-                        fragment.flagged.toggle()
-                    }
-                } label: {
-                    makeLabel(fragment)
+                VStack(alignment: .leading, spacing: 20) {
+                    historyText
+                    currentText
+                    scrollmark
                 }
-                .disabled(viewModel.listening || fragment.isPunctuation)
-                .id(fragment.id)
+                .font(.system(size: viewModel.fontSize))
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal)
+            }
+            .onChange(of: viewModel.current) { _ in
+                reader.scrollTo(viewModel.scrollmark)
             }
         }
-        .padding(.horizontal)
     }
     
-    private func makeLabel(_ fragment: Fragment) -> some View {
-        VStack {
-            Text(fragment.correction ?? "")
-                .font(.caption)
-                .opacity(0)
-            Text(fragment.pinyin) {
-                $0.foregroundColor = fragment.isPunctuation ? .secondary.opacity(0.60) : .primary
-                $0.strikethroughStyle = Text.LineStyle(pattern: .solid, color: fragment.flagged ? .red : .clear)
+    private var historyText: some View {
+        ForEach($viewModel.history, id: \.self) { $text in
+            Text(viewModel.pinyin ? text.pinyin() : text)
+                .frame(maxWidth: .infinity, alignment: .leading)
+        }
+    }
+    
+    private var scrollmark: some View {
+        Image(systemName: "circle")
+            .opacity(0)
+            .id(viewModel.scrollmark)
+    }
+    
+    private var currentText: some View {
+        Group {
+            if viewModel.activelyListening {
+                activeCurrentText
+            } else if viewModel.passivelyListening {
+                Text("...")
+                    .foregroundColor(.secondary)
+            } else {
+                Text(viewModel.pinyin ? viewModel.current.pinyin() : viewModel.current)
             }
-            .font(.title)
-            .padding(EdgeInsets(top: 0, leading: 5, bottom: 0, trailing: fragment.isPunctuation ? -5 : 5))
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+    
+    private var activeCurrentText: some View {
+        Group {
+            Text(viewModel.pinyin ? viewModel.current.pinyin() : viewModel.current) +
+            Text(" \(Image(systemName: "arrow.turn.down.left"))")
+                .font(.system(size: viewModel.fontSize*0.65))
+                .foregroundColor(.pink)
+        }
+        .onTapGesture { viewModel.newline() }
+    }
+    
+    private var controls: some View {
+        VStack(spacing: 15) {
+            popUpSettings
+            HStack(spacing: 0) {
+                clearButton
+                mainButton
+                settingsButton
+            }
+            .foregroundColor(.primary)
+            .font(.title3)
+            .frame(maxWidth: .infinity)
+            .padding()
+            .background(controlsBackground)
+        }
+        .padding()
+    }
+    
+    @ViewBuilder private var popUpSettings: some View {
+        if viewModel.settingsIsDisplayed {
+            HStack(spacing: 15) {
+                fontSlider
+                pinyinToggler
+                // TODO: tipButton
+            }
+            .padding(.horizontal, 5)
+        }
+    }
+    
+    private var fontSlider: some View {
+        HStack {
+            Image(systemName: "textformat.size.smaller")
+                .font(.title2)
+            Slider(value: $viewModel.fontSize, in: 20...40)
+                .tint(.primary)
+            Image(systemName: "textformat.size.larger")
+                .font(.title2)
+        }
+    }
+    
+    private var pinyinToggler: some View {
+        Button {
+            viewModel.pinyin.toggle()
+        } label: {
+            ZStack {
+                Text("拼音")
+                    .opacity(0)
+                Text(viewModel.pinyin ? "中文" : "拼音")
+            }
+            .padding(5)
             .background(
                 RoundedRectangle(cornerRadius: 4)
-                    .foregroundColor(fragment.flagged ? pinkishColor : .clear)
+                    .stroke(lineWidth: 1.5)
+                    .foregroundColor(.primary)
             )
+            .foregroundColor(.primary)
+            .font(.caption)
         }
-        .padding(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: fragment.precedesPunctuation ? -5 : 5))
     }
     
-    private var pinkishColor: Color {
-        colorScheme == .dark ? .pink.opacity(0.40) : .red.opacity(0.15)
+    private var tipButton: some View {
+        Button {
+            print("Tip")
+        } label: {
+            Image(systemName: "app.gift")
+                .foregroundColor(.pink)
+                .font(.title.weight(.light))
+        }
     }
     
-    private var footer: some View {
-        micButton
+    private var clearButton: some View {
+        Button {
+            viewModel.clear()
+        } label: {
+            Image(systemName: "clear")
+                .padding(10)
+        }
+        .frame(maxWidth: .infinity)
+        .opacity(viewModel.listening ? 0 : 1)
     }
     
-    private var micButton: some View {
+    private var mainButton: some View {
         Button {
             viewModel.toggle()
         } label: {
             ZStack {
-                Image(systemName: "circle")
-                    .font(.largeTitle)
-                    .layoutPriority(1)
+                Image(systemName: "pause")
                     .opacity(0)
-                Image("orange")
-                    .resizable()
-                    .layoutPriority(-1)
-                    .scaleEffect(1.5)
-                    .shadow(radius: 1, y: 1)
+                Image(systemName: viewModel.listening ? "pause" : "mic")
             }
-            .padding(20)
+            .font(.title3.weight(viewModel.listening ? .semibold : .regular))
+            .foregroundColor(viewModel.listening ? .red : .primary)
+            .padding(10)
         }
+        .frame(maxWidth: .infinity)
+    }
+    
+    private var settingsButton: some View {
+        Button {
+            viewModel.settingsIsDisplayed.toggle()
+        } label: {
+            Image(systemName: "gearshape")
+                .frame(maxWidth: .infinity)
+                .padding(10)
+        }
+        .opacity(viewModel.listening ? 0 : 1)
+    }
+    
+    private var controlsBackground: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 10)
+                .fill(.primary)
+                .colorInvert()
+                .shadow(color: .black.opacity(0.05), radius: 10, x: 0, y: 0)
+            if colorScheme == .dark {
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(.primary)
+            }
+        }
+    }
+    
+    private var contentBackground: some View {
+        Color.secondary
+            .opacity(0.04)
+            .edgesIgnoringSafeArea(.all)
     }
 }
 
 struct TranscribeView_Previews: PreviewProvider {
     static var previews: some View {
-        TranscribeView("我爱你。 你也爱我吗？")
+        TranscribeView("我喜欢学习中文.", listening: false, pinyin: true, settings: true)
+        TranscribeView("我喜欢学习中文.", listening: true, pinyin: false)
+        TranscribeView(["我喜欢学习中文.", "你喜欢学习中文吗?"], listening: true)
     }
 }
