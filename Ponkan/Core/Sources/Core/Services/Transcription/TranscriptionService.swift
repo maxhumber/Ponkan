@@ -1,5 +1,3 @@
-// Contrast with: https://developer.apple.com/tutorials/app-dev-training/transcribing-speech-to-text
-
 import Combine
 import Foundation
 import Speech

@@ -16,9 +16,20 @@ import SwiftUI
     private let service = TranscriptionService(.mandarin)
     private var task: Task<Void, Never>?
     
-    init(_ text: String = "", listening: Bool = false) {
+    init() {}
+    
+    init(text: String, listening: Bool, pinyin: Bool, settings: Bool) {
         self.current = text
         self.listening = listening
+        self.pinyin = pinyin
+        self.settingsIsDisplayed = settings
+    }
+    
+    init(text: [String], listening: Bool, pinyin: Bool, settings: Bool) {
+        self.history = text
+        self.listening = listening
+        self.pinyin = pinyin
+        self.settingsIsDisplayed = settings
     }
     
     var scrollmark: String {

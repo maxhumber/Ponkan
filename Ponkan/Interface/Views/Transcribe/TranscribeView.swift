@@ -5,8 +5,16 @@ struct TranscribeView: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     @StateObject private var viewModel: TranscribeViewModel
     
-    init(_ text: String = "", listening: Bool = false) {
-        self._viewModel = StateObject(wrappedValue: .init(text, listening: listening))
+    init() {
+        self._viewModel = StateObject(wrappedValue: .init())
+    }
+    
+    init(_ text: String, listening: Bool = false, pinyin: Bool = true, settings: Bool = false) {
+        self._viewModel = StateObject(wrappedValue: .init(text: text, listening: listening, pinyin: pinyin, settings: settings))
+    }
+    
+    init(_ text: [String], listening: Bool = false, pinyin: Bool = true, settings: Bool = false) {
+        self._viewModel = StateObject(wrappedValue: .init(text: text, listening: listening, pinyin: pinyin, settings: settings))
     }
     
     var body: some View {
@@ -101,7 +109,7 @@ struct TranscribeView: View {
             HStack(spacing: 15) {
                 fontSlider
                 pinyinToggler
-                tipButton
+                // TODO: tipButton
             }
             .padding(.horizontal, 5)
         }
@@ -208,6 +216,8 @@ struct TranscribeView: View {
 
 struct TranscribeView_Previews: PreviewProvider {
     static var previews: some View {
-        TranscribeView()
+        TranscribeView("我喜欢学习中文.", listening: false, pinyin: true, settings: true)
+        TranscribeView("我喜欢学习中文.", listening: true, pinyin: false)
+        TranscribeView(["我喜欢学习中文.", "你喜欢学习中文吗?"], listening: true)
     }
 }

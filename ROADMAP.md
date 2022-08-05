@@ -1,9 +1,6 @@
 ### Roadmap
 
 - Tip Screen
-
----
-
 - "Delete/redo a line"
 
 - In-line corrections

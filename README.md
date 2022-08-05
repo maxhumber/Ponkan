@@ -15,7 +15,7 @@ I use Ponkan to practise my Mandarin in the same way that I use [MonkeyType](htt
 
 ### Download 
 
-[![BreadBuddy Download Link](https://raw.githubusercontent.com/maxhumber/BreadBuddy/master/Marketing/Logos/AppStore.svg)](https://apps.apple.com/app/id1632470402)
+[![Ponkan Download Link](https://raw.githubusercontent.com/maxhumber/BreadBuddy/master/Marketing/Logos/AppStore.svg)](https://apps.apple.com/app/id1632470402)
 
 
 
@@ -44,12 +44,16 @@ The main `transcribe` method on the service looks like this:
 
 ```swift 
 ...    
-    public func transcribe() -> AsyncThrowingStream<String?, Error> {
+    public func transcribe() -> AsyncThrowingStream<String, Error> {
         AsyncThrowingStream { continuation in
-            recognizer.recognitionTask(with: request) { result, error in
+            var task: SFSpeechRecognitionTask?
+            let onTermination = { task?.cancel() }
+            continuation.onTermination = { @Sendable _ in onTermination() }
+            task = recognizer.recognitionTask(with: request) { result, error in
                 if error != nil { continuation.finish(throwing: error) }
                 if result?.isFinal == true { continuation.finish() }
-                continuation.yield(result?.bestTranscription.formattedString)
+                let string = result?.bestTranscription.formattedString ?? ""
+                continuation.yield(string)
             }
         }
     }
@@ -62,8 +66,8 @@ Which enables the ViewModel to capture output like this:
 import Core
 
 @MainActor final class ViewModel: ObservableObject {
-    @Published var text = ""
     @Published var listening = false
+    @Published var text = ""
   
     private let service = TranscriptionService(.mandarin)
     private var task: Task<Void, Never>?
@@ -74,9 +78,7 @@ import Core
             do {
                 try await service.start()
                 for try await text in service.transcribe() {
-                    if let text {
-                        self.text = text
-                    }
+                    self.text = text
                 }
             } catch {
                 stop()
@@ -85,10 +87,10 @@ import Core
     }
     
     private func stop() {
+        listening = false 
         service.stop()
         task?.cancel()
         task = nil
-        listening = false
     }
 }
 ```
@@ -103,4 +105,4 @@ I have a running joke with my partner that I'm not quite a Mandarin (speaker) ye
 
 ### Disclaimer
 
-<sup>† While the (on-device) speech recognition APIs provided by Apple—and used in this app—are *pretty good*, they're not 100% perfect. So, if Ponkan isn't able to recognize 100% of your "100% perfect" pronunciation, blame Apple! 😘</sup>
+<sup>† While the Speech API provided by Apple—and used in this app—is *pretty good*, it's not 100% perfect. So, if Ponkan isn't able to recognize 100% of your "100% perfect" pronunciation, you know who to blame! 😘</sup>
