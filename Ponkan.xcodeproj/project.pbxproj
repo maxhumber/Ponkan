@@ -17,6 +17,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		50052D5228A15E1C0079AF9B /* Example.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Example.xcconfig; sourceTree = "<group>"; };
+		50052D5328A15E320079AF9B /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		50052D5428A15E4A0079AF9B /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		501A0753286B740100733BED /* Sugar */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Sugar; sourceTree = "<group>"; };
 		50AE81FA2899A6660010B55F /* TranscribeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscribeView.swift; sourceTree = "<group>"; };
 		50AE81FC2899A6940010B55F /* TranscribeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscribeViewModel.swift; sourceTree = "<group>"; };
@@ -92,6 +95,9 @@
 				50EFB9F0286A0EFE006E3E06 /* PonkanApp.swift */,
 				50EFB9F4286A0EFF006E3E06 /* Assets.xcassets */,
 				50EE3C0E286F429D007BA920 /* Info.plist */,
+				50052D5228A15E1C0079AF9B /* Example.xcconfig */,
+				50052D5328A15E320079AF9B /* Debug.xcconfig */,
+				50052D5428A15E4A0079AF9B /* Release.xcconfig */,
 			);
 			path = App;
 			sourceTree = "<group>";
