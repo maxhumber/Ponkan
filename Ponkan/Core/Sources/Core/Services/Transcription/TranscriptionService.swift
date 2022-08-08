@@ -16,7 +16,7 @@ public final class TranscriptionService {
     ///   - bus: Bus onto which the request will be installed
     ///   - frames: BufferSize for the SFSpeechAudioBufferRecognitionRequest
     ///   - session: AVAudioSession used to capture audio
-    public init(_ language: Language = .english, bus: AVAudioNodeBus = 0, frames: AVAudioFrameCount = 1024, session: AVAudioSession = .sharedInstance()) {
+    public init(language: Language = .english, bus: AVAudioNodeBus = 0, frames: AVAudioFrameCount = 1024, session: AVAudioSession = .sharedInstance()) {
         self.recognizer = SFSpeechRecognizer(locale: .init(identifier: language.code))!
         self.bus = bus
         self.frames = frames

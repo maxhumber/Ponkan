@@ -216,8 +216,20 @@ struct TranscribeView: View {
 
 struct TranscribeView_Previews: PreviewProvider {
     static var previews: some View {
+        screen1
+        screen2
+        screen3
+    }
+    
+    static var screen1: some View {
         TranscribeView("我喜欢学习中文.", listening: false, pinyin: true, settings: true)
+    }
+    
+    static var screen2: some View {
         TranscribeView("我喜欢学习中文.", listening: true, pinyin: false)
+    }
+    
+    static var screen3: some View {
         TranscribeView(["我喜欢学习中文.", "你喜欢学习中文吗?"], listening: true)
     }
 }

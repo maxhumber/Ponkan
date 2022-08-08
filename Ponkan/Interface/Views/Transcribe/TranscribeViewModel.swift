@@ -13,7 +13,7 @@ import SwiftUI
     @Published var history = [String]()
     @Published var error: Error? = nil
     
-    private let service = TranscriptionService(.mandarin)
+    private let service = TranscriptionService(language: .mandarin)
     private var task: Task<Void, Never>?
     
     init() {}

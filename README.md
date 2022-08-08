@@ -69,7 +69,7 @@ import Core
     @Published var listening = false
     @Published var text = ""
   
-    private let service = TranscriptionService(.mandarin)
+    private let service = TranscriptionService(language: .mandarin)
     private var task: Task<Void, Never>?
   
     private func start() {
