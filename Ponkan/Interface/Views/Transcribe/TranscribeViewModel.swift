@@ -36,6 +36,10 @@ import SwiftUI
         "SCROLLMARK"
     }
     
+    var clearIsDisabled: Bool {
+        current.isEmpty && history.isEmpty
+    }
+    
     var passivelyListening: Bool {
         listening && current.isEmpty
     }

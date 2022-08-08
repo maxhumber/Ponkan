@@ -109,7 +109,7 @@ struct TranscribeView: View {
             HStack(spacing: 15) {
                 fontSlider
                 pinyinToggler
-                // TODO: tipButton
+                tipButton
             }
             .padding(.horizontal, 5)
         }
@@ -160,11 +160,14 @@ struct TranscribeView: View {
         Button {
             viewModel.clear()
         } label: {
-            Image(systemName: "clear")
+            Image(systemName: viewModel.clearIsDisabled ? "square" : "clear")
                 .padding(10)
         }
         .frame(maxWidth: .infinity)
         .opacity(viewModel.listening ? 0 : 1)
+        .opacity(viewModel.clearIsDisabled ? 0.50 : 1)
+        .foregroundColor(viewModel.clearIsDisabled ? .secondary : .primary)
+        .disabled(viewModel.clearIsDisabled)
     }
     
     private var mainButton: some View {
